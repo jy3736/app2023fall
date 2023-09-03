@@ -1,0 +1,681 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Course Overview</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="ff8278e2-1a66-46c5-9368-0e15e211bb91" class="page sans"><header><img class="page-cover-image" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/app_inventor_01.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/yang-tr-wb.png"/></div><h1 class="page-title">Course Overview</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="bf594944-c146-4a0a-adeb-dfa8d7840432" class="block-color-teal_background">Resources &amp; Flipped Classroom Materials</h2><div id="d95c4374-4123-422e-ad82-7a483b6cf40b" class="column-list"><div id="d30c7a60-1fbb-4285-abe2-56cada305ba4" style="width:31.25%" class="column"><figure id="d4593fd7-9ab7-44ae-bf4e-c7d435111c29" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled.png"><img style="width:296px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled.png"/></a></figure></div><div id="55793415-36a4-4107-b452-07df568e9033" style="width:68.75%" class="column"><figure id="3ab76849-44f4-4266-b764-7eaf3428752e"><a  target="_blank" href="https://youtu.be/uWippuzhUZ8" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">課程簡介 (線上同步授課錄影)</div><div class="bookmark-description">APP 程式設計實務 (2021 Fall)</div></div><div class="bookmark-href"><img src="https://www.youtube.com/s/desktop/18069be1/img/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/uWippuzhUZ8</div></div><img src="https://i.ytimg.com/vi/uWippuzhUZ8/hqdefault.jpg" class="bookmark-image"/></a></figure><p id="f130f0e4-398b-487f-91f0-0b554beef6c1" class="">
+</p></div></div><ul id="ec3d1cd2-cda3-4fd1-bb35-a002c73c7311" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://trends.google.com/trends/explore?date=today%205-y&amp;q=%2Fg%2F11h03gfxy9,%2Fg%2F11f03_rzbg">Google Trends - Google 搜尋趨勢</a></li></ul><ul id="723641bf-fb90-48a5-bbdc-a0847560c0c5" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://appinventor.mit.edu/">Tutorials for MIT App Inventor</a></li></ul><ul id="959a5723-e830-4745-802d-7d8e56408fe7" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://appinventor.mit.edu/explore/ai-with-mit-app-inventor">Artificial Intelligence with MIT App Inventor</a></li></ul><h2 id="7b8115cb-5683-418a-b907-c4f5490b6ea3" class="block-color-teal_background">Curriculum Development</h2><h3 id="b0fd041d-6aa2-446c-871d-6db89a3408db" class="block-color-gray_background">Syllabus</h3><h3 id="01d84742-ec84-473d-900d-76af4010cf86" class="">Course Description:</h3><p id="354297e8-a970-4e07-9c2a-f26faa3d1811" class="">Embark on a transformative journey in the &quot;App Inventor Development and IoT Integration&quot; course. Over 18 weeks, you&#x27;ll master App Inventor for mobile app creation, explore JavaScript&#x27;s power, and harness Node-RED for IoT innovation. Begin by grasping app essentials, UI design, and real-time Firebase integration. Craft a dice app and dive into an IoT Temperature Monitor simulation for your midterm project. </p><p id="b12560fc-c30b-4f8a-b8b0-afd45aea7d81" class="">Expand your horizons with JavaScript game app development, and then delve into JavaScript basics. Unlock Node-RED&#x27;s potential through flow design, logic integration, and IoT device incorporation. Craft a project proposal, ensuring your final project aligns with your vision. Progress discussions ensure you&#x27;re on track before presenting your IoT solution in the course&#x27;s culmination. Incorporate mobile apps, games, and IoT into your skill set. This course empowers you to innovate, equipping you with sought-after abilities in app development and IoT integration.</p><h3 id="627d3080-aeff-49ff-b90d-29aba5e05ec5" class="">Course Schedule:</h3><table id="eb3b9b9d-2fa2-4b43-ab22-e2d0febea1ff" class="simple-table"><tbody><tr id="6558a440-221f-415e-bb43-71df52f558dd"><td id="@\mW" class=""><strong>Week</strong></td><td id="&gt;lJp" class="" style="width:295px"><strong>Topic</strong></td><td id="F&gt;[v" class="" style="width:280px"><strong>Subtopics</strong></td></tr><tr id="916a64b5-00c0-4252-95ec-baab9b23e3c1"><td id="@\mW" class="">1</td><td id="&gt;lJp" class="" style="width:295px">Introduction to App Inventor Development</td><td id="F&gt;[v" class="" style="width:280px">Course overview, App Inventor introduction, SCRCPY overview for Android mirroring</td></tr><tr id="b53b31e6-2c9c-478f-9011-7d4f51c941eb"><td id="@\mW" class="">2-3</td><td id="&gt;lJp" class="" style="width:295px">App Inventor Basics and UI Layout</td><td id="F&gt;[v" class="" style="width:280px">App Inventor basics, UI layout exploration, Clock UI and random numbers creation</td></tr><tr id="15a7b953-e051-4443-97d9-de305f85b84c"><td id="@\mW" class="">4-5</td><td id="&gt;lJp" class="" style="width:295px">Screen Navigation and Data Passing</td><td id="F&gt;[v" class="" style="width:280px">Screen-based app design, data passing, Integrating designs with components</td></tr><tr id="19514bc5-54c4-4eb1-880c-fbd86eb7f13f"><td id="@\mW" class="">6-7</td><td id="&gt;lJp" class="" style="width:295px">Google Firebase Integration</td><td id="F&gt;[v" class="" style="width:280px">Google Firebase Realtime Database intro, Implementing real-time interactions</td></tr><tr id="07a195a8-2967-42fc-b371-603bec10bc9c"><td id="@\mW" class="">8</td><td id="&gt;lJp" class="" style="width:295px">Classroom Exercises</td><td id="F&gt;[v" class="" style="width:280px">Rolling Dice app design, Advanced Dice app design</td></tr><tr id="20297f20-fb2d-4ec9-ba18-b901ea964483"><td id="@\mW" class="">9</td><td id="&gt;lJp" class="" style="width:295px">Midterm Project</td><td id="F&gt;[v" class="" style="width:280px">IoT Temperature Monitor simulation</td></tr><tr id="01559ade-2828-4093-9ec3-4802c358a642"><td id="@\mW" class="">10-11</td><td id="&gt;lJp" class="" style="width:295px">Creating a Simple Game App</td><td id="F&gt;[v" class="" style="width:280px">“When Cockroaches Met Slippers” game app with JavaScript</td></tr><tr id="a54c6430-a2b2-4523-896f-c529e1457763"><td id="@\mW" class="">12-13</td><td id="&gt;lJp" class="" style="width:295px">JavaScript Fundamentals</td><td id="F&gt;[v" class="" style="width:280px">Introduction to JavaScript, Variables, functions, control flow</td></tr><tr id="fe37e9d7-6a01-4c68-a7d9-5a40849a2e55"><td id="@\mW" class="">14-15</td><td id="&gt;lJp" class="" style="width:295px">Node-RED Fundamentals</td><td id="F&gt;[v" class="" style="width:280px">Node-RED introduction, Creating flows, connecting nodes</td></tr><tr id="4ae67fec-72c6-48ea-8dcd-bfe0a779700a"><td id="@\mW" class="">16</td><td id="&gt;lJp" class="" style="width:295px">Final Project Proposal</td><td id="F&gt;[v" class="" style="width:280px">Discussion of final project ideas, Writing IoT project proposals</td></tr><tr id="8c92941c-b09b-4466-a4a3-235d70b7242d"><td id="@\mW" class="">17</td><td id="&gt;lJp" class="" style="width:295px">Project Progress Discussion</td><td id="F&gt;[v" class="" style="width:280px">Reviewing project plans and progress, Ensuring alignment with project goals</td></tr><tr id="0fb4d1e7-7cc4-45a2-9777-88eb8ea8260b"><td id="@\mW" class="">18</td><td id="&gt;lJp" class="" style="width:295px">Final Project Demo and Presentation</td><td id="F&gt;[v" class="" style="width:280px">Finalizing projects, Presenting and demonstrating completed IoT projects</td></tr></tbody></table><h3 id="2e122480-2551-4b02-88d1-2c6ffdc1c0ac" class="block-color-gray_background">上課規範 / 評分規則</h3><ul id="964fdc81-f3db-4bf0-bc95-8bb4e4b325dc" class="bulleted-list"><li style="list-style-type:disc">第一堂課鐘響 <strong><mark class="highlight-red">20分鐘後</mark></strong>，不定時使用 Zuvio 線上快速簽到(點名)。<ul id="865aa130-f212-47c0-836c-7c509f6cd0ac" class="bulleted-list"><li style="list-style-type:circle"><strong>線上簽到率 &gt; 90%</strong>  - <strong>平時成績【總成績】加 5分。</strong></li></ul></li></ul><ul id="ced52291-3f5a-4daf-afff-aefd29ea80da" class="bulleted-list"><li style="list-style-type:disc"><strong><mark class="highlight-yellow">上課期間「干擾」0容忍!</mark></strong><ul id="55717576-ccf2-428a-bef8-9beca86dd606" class="bulleted-list"><li style="list-style-type:circle">課堂上嚴禁做其他「與本課程無關」之事務，例如：寫作業、看影片、上網閒逛、...等等。</li></ul><ul id="97bd1fd4-8141-43f5-ace1-e8e96cb4f1aa" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red"><strong>罰則：</strong></mark><strong>第一次「口頭警告」，再犯每次『平時成績【總成績】扣 5分』。</strong></li></ul></li></ul><ul id="c41cadec-7c30-46f0-b768-a2ee6d876502" class="bulleted-list"><li style="list-style-type:disc">評分規則<ul id="3706ee66-41ca-4a48-89be-1932e62d0d14" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-red">平時成績 (50%)</mark></strong> - 課堂實作練習、Zuvio 形成性評量 (填寫狀況)。</li></ul><ul id="b63ee70a-523f-4394-b392-5e8a9cc861db" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-red">期中成績 (20%)</mark></strong> - 上機考試/實務專題。</li></ul><ul id="643866d3-ceb3-445b-8490-4315092848ef" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-red">期末成績 (30%)</mark></strong> - 實務專題。</li></ul></li></ul><h3 id="d22857a8-4314-47d3-b52b-9780047a10b6" class="block-color-gray_background">Explore cross-platform app development trends</h3><figure id="fbf738c1-047c-461b-938d-43d6aa36da8d" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%201.png"><img style="width:3003px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%201.png"/></a></figure><h3 id="6f8925c3-f326-493a-a184-5e8a473aa232" class="block-color-yellow"><a  target="_blank" href="https://trends.google.com/trends/explore?date=today%205-y&amp;geo=TW&amp;q=%2Fg%2F11h03gfxy9,%2Fg%2F11f03_rzbg">Google Trends - App Developmement Framework</a></h3><figure id="6ca983f0-ab78-494c-b61e-00e195a55b8e" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%202.png"><img style="width:1783px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%202.png"/></a></figure><figure id="620c35fe-2ca0-4e8d-8542-4e0bbbd35c21" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%203.png"><img style="width:1791px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%203.png"/></a></figure><h3 id="27f5daa8-586f-4116-a4b9-2597ed599d98" class="block-color-yellow"><a  target="_blank" href="https://trends.google.com/trends/explore?geo=TW&amp;q=%2Fm%2F0_lcrx4,%2Fm%2F010sd4y3,%2Fm%2F0h52xr1,%2Fm%2F02p97,%2Fm%2F07sbkfb">Google Trends - App Programming Languages</a></h3><figure id="5fecd646-9b8c-4de5-8f04-460b12f4b7fa" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%204.png"><img style="width:1780px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%204.png"/></a></figure><h3 id="35b841d6-2e6f-4236-a1c2-556da2472436" class="block-color-yellow"><a  target="_blank" href="https://www.tiobe.com/tiobe-index/">TIOBE Index - Popular Programming Language Rankings</a></h3><figure id="07afbee3-9722-4e31-bf85-ab7dc609a9d9" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%205.png"><img style="width:1846px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%205.png"/></a></figure><h3 id="06d378e8-36f8-4ebc-b7a9-a0cf62c80c3e" class="block-color-yellow">Initial Attempt with App Inventor 2</h3><figure id="177ec312-032e-4214-bd3a-ed1d0579bb75"><a  target="_blank" href="https://appinventor.mit.edu/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">MIT App Inventor | Explore MIT App Inventor</div><div class="bookmark-description">App Inventor open job position MIT App Inventor has an immediate opening for an additional member of our development team. We&#x27;re looking for an experienced developer who can join us in the support and evolution of the App Inventor platform, including our new work in conversational AI.</div></div><div class="bookmark-href">https://appinventor.mit.edu/</div></div><img src="https://appinventor.mit.edu/images/CTCommendation/Resource%20School.png" class="bookmark-image"/></a></figure><h3 id="6808117d-92f8-4d27-b8a3-98123c3f1eb2" class="block-color-teal_background">Assignments</h3><h3 id="a6ab47f4-1364-48f9-82f7-ab161612ce45" class="block-color-gray_background">Homework 01 - First App Inventor Project</h3><ul id="399c49a4-bde5-4219-b77a-61ecf787e50d" class="bulleted-list"><li style="list-style-type:disc">This project uses 2 basic components: Button and Label.</li></ul><ul id="a0c2a28e-ad47-43ac-99cf-f2b1947f59d8" class="bulleted-list"><li style="list-style-type:disc">Choose a representative image as the background picture (BackgroundImage) for the main screen (Screen1).</li></ul><ul id="accf5698-c8d1-404b-85bf-de3ee9ac6ae5" class="bulleted-list"><li style="list-style-type:disc">Set the name of this app (AppName) to &quot;First App&quot;.</li></ul><ul id="8f9dc682-7f4e-4857-af90-f4d3fefe5d88" class="bulleted-list"><li style="list-style-type:disc">Set the title of the main screen to &quot;Week 01 - Lab 01&quot;.</li></ul><ul id="3a612e36-cd0d-44f8-ab82-38f9d232c907" class="bulleted-list"><li style="list-style-type:disc">Each time the Button is pressed, the counter displayed by the Label increases by 1.</li></ul><ul id="a26a42fd-f9dc-4be7-a8f6-0bdaf6898295" class="bulleted-list"><li style="list-style-type:disc">Use AI2 Companion to connect and test on an Android phone.</li></ul><ul id="fd5eaabe-4939-420e-8565-183e3d128dc9" class="bulleted-list"><li style="list-style-type:disc">Build the tested app into an Android App (.apk) project file and download it to install on the phone.</li></ul><ul id="be38938a-2ddc-4ed4-b11a-14565890b1cb" class="bulleted-list"><li style="list-style-type:disc">For page design, refer to the details below:</li></ul><div id="6a84c6db-278a-451e-ba54-84ca92be5a91" class="column-list"><div id="f88a088f-5408-47fe-8608-e1de60ee26ec" style="width:33.33333333333333%" class="column"><figure id="439cadc2-4af8-4216-9a6d-a95eee09f31d" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%206.png"><img style="width:240px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%206.png"/></a></figure></div><div id="61f093ca-93de-48f2-811c-fd40c81a948f" style="width:33.33333333333333%" class="column"><figure id="971bf1bc-51bd-4a6a-a9d2-af1bba339579" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%207.png"><img style="width:240px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%207.png"/></a></figure></div><div id="5be921e9-ed9f-4821-b7d0-39f0e5a32535" style="width:33.33333333333332%" class="column"><figure id="3e6c8052-7936-476a-b552-9ba7daffd3e2" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%208.png"><img style="width:240px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%208.png"/></a></figure></div></div><h2 id="8a50b511-3b1d-437a-a54b-b36e4c9eaf92" class="block-color-gray_background"><strong>Homework 02 - Choose a Lucky Date App</strong></h2><ul id="991acae2-b508-430d-9740-12f92f7420c6" class="bulleted-list"><li style="list-style-type:disc">Connect to an Android phone for testing using AI2 Companion.</li></ul><ul id="c78ced98-985c-44f5-97d4-6ee2ec58b36c" class="bulleted-list"><li style="list-style-type:disc">Build the tested app into an Android App (.apk) project file and download it for installation on the phone.</li></ul><ul id="7a36cf94-8d37-45f3-8d09-c4ebbd210e7c" class="bulleted-list"><li style="list-style-type:disc">For page design, please refer to the following:</li></ul><div id="317eb990-5459-4731-8c90-ab9c2756af47" class="column-list"><div id="9d155e36-b5b4-48fe-beb6-682f588c6313" style="width:62.5%" class="column"><figure id="53a011ad-926b-44a4-b17d-f8e4eea7db6c" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%209.png"><img style="width:432px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%209.png"/></a></figure></div><div id="534d2aed-402f-463d-9648-1d2be6037c56" style="width:37.49999999999999%" class="column"><figure id="b153acea-0a41-44df-991d-2654c292b67c" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%2010.png"><img style="width:910px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%2010.png"/></a></figure></div></div><div id="da5b883c-e654-4526-b09b-67ffd4a3e65a" class="column-list"><div id="60f79d26-46d2-443f-89c2-4723ab8aaa37" style="width:37.5%" class="column"><figure id="9fbdfb5f-531e-487d-9976-11044f633675" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%2011.png"><img style="width:240px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%2011.png"/></a></figure></div><div id="9abb129a-73d6-437c-8644-829708902dd2" style="width:62.5%" class="column"><figure id="551e7c5c-dbe6-4d79-a59d-60ef3eedadb8" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%2012.png"><img style="width:240px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/Untitled%2012.png"/></a></figure></div></div><hr id="b2e6c6a9-1d4e-4c88-b6ee-edbb5f24f779"/><p id="b315e42a-60c3-47b1-82cb-6668a0f4f552" class="">
+</p><p id="27a032ae-a245-44c8-9fad-614a69b5eb2f" class="">
+</p><figure id="26fc8d6b-8675-4c0b-8aa2-06e6a455fac4" class="image"><a href="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/11.png"><img style="width:1500px" src="Course%20Overview%20ff8278e21a6646c593680e15e211bb91/11.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
