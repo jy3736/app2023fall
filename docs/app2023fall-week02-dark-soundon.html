@@ -1,0 +1,688 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Testing Your App Using MIT AI2 Companion</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="7859f408-73b1-4eff-bdae-c0c64ce4555d" class="page sans"><header><img class="page-cover-image" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/%E6%9C%AA%E5%91%BD%E5%90%8D%E8%A8%AD%E8%A8%88_(2).png" style="object-position:center 100%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/yang-tr-wb.png"/></div><h1 class="page-title">Testing Your App Using MIT AI2 Companion</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="906148d4-3524-46ed-8c9b-d5cc01c2290d" class="block-color-teal_background">References + Supplementary Video</h2><div id="80f33592-b970-4e15-af1f-ec792dea1957" class="column-list"><div id="aec8d331-ce1f-4661-9836-8eeece07651a" style="width:31.25%" class="column"><figure id="ab9a172f-8c61-44dd-88a9-549814859d01" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled.png"><img style="width:296px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled.png"/></a></figure></div><div id="47c04aa9-cd5f-4c8b-933b-6675e4e5f50b" style="width:68.75%" class="column"><figure id="a218209e-627e-472d-9c54-f7c2ebc89cd5"><a  target="_blank" href="https://youtu.be/UgyZp_Rahlg" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">使用 MIT AI2 Companion 連接Android 設備測試APP</div><div class="bookmark-description">APP 程式設計實務(2021 Fall)</div></div><div class="bookmark-href"><img src="https://www.youtube.com/s/desktop/18069be1/img/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/UgyZp_Rahlg</div></div><img src="https://i.ytimg.com/vi/UgyZp_Rahlg/hqdefault.jpg" class="bookmark-image"/></a></figure></div></div><h2 id="63088e06-d1ec-4fb3-9b1c-015c881eba4e" class="block-color-teal_background">Curriculum Design</h2><h3 id="2298a56d-cab1-4417-821b-83da4c446ac5" class="block-color-gray_background">To connect your Android device to the AI2 Companion:</h3><ol type="1" id="db7b3fb8-4bf3-4a4e-ab13-d4f044e6bd8b" class="numbered-list" start="1"><li>Make sure your Android device is connected to the same Wi-Fi network as your computer.</li></ol><ol type="1" id="1f155d63-9e61-4919-be98-cc8f01a6c237" class="numbered-list" start="2"><li>On your Android device, open the Google Play Store.</li></ol><ol type="1" id="b168130b-7b55-4578-b99e-87a56081d558" class="numbered-list" start="3"><li>Search for &quot;AI2 Companion&quot; and install the app if you haven&#x27;t already installed.</li></ol><ol type="1" id="edd89134-e37a-4ea8-b10a-d46b0d392b9a" class="numbered-list" start="4"><li>Open the AI2 Companion app on your Android device.</li></ol><ol type="1" id="6215ec24-3f1d-4942-99a1-e35eee4316f5" class="numbered-list" start="5"><li>On your computer, launch MIT App Inventor.</li></ol><ol type="1" id="d9b8eb45-86a0-4358-af63-930a8e4fd366" class="numbered-list" start="6"><li>In the development environment, click on the &quot;Connect&quot; option or a similar feature that allows you to pair your Android device with the development environment.</li></ol><ol type="1" id="72cafa88-5c7f-471b-a4c1-d8697e84c879" class="numbered-list" start="7"><li>A QR code or a pairing code will be displayed on your computer screen.</li></ol><ol type="1" id="362b59fd-36d4-48dc-982f-933381cec7e1" class="numbered-list" start="8"><li>On your Android device, use the AI2 Companion app to scan the QR code or enter the pairing code provided on your computer.</li></ol><ol type="1" id="ca588f05-105f-4f90-a152-fedec88d720f" class="numbered-list" start="9"><li>Once the pairing is successful, your Android device should now be connected to the development environment. You can use the AI2 Companion to test and interact with your app as you develop it.</li></ol><p id="b545b7f9-9364-48ab-9d93-f28d2f00d446" class="">
+</p><figure id="4110aae4-b521-4e6f-a364-c94e5ec12630" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%201.png"><img style="width:3450px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%201.png"/></a></figure><p id="008bfcf7-f948-4ae0-84f1-b322b9d7f9bb" class="">
+</p><h3 id="b52bc893-9d73-4d10-9e91-77a7cfef0835" class="block-color-gray_background">To access a sample project for testing with the AI2 Companion app:</h3><ol type="1" id="fde616f7-9191-4c05-a68d-1d77b6a93916" class="numbered-list" start="1"><li>Open the AI2 Companion app on your Android device.</li></ol><ol type="1" id="61f5f49e-f4ba-4908-80b7-a88e467893ff" class="numbered-list" start="2"><li>On your computer, open MIT App Inventor.</li></ol><ol type="1" id="b7a7ffd1-c0f9-4734-bf74-e556d148d45a" class="numbered-list" start="3"><li>Create or open a project you want to test with the AI2 Companion app.</li></ol><ol type="1" id="4a2e620b-dd68-478b-9c97-04b13d52827e" class="numbered-list" start="4"><li>In your development environment, find the option to connect or pair your Android device with the project. This is usually labeled as &quot;Connect Device&quot; or something similar.</li></ol><ol type="1" id="d487b422-c9aa-475d-9917-f04b72e8017b" class="numbered-list" start="5"><li>Once your Android device is connected to the development environment, you can choose or open a sample project from within your development environment. </li></ol><ol type="1" id="fb0925f2-b042-45e7-ae7d-31dd9a4c0f29" class="numbered-list" start="6"><li>Select a sample project from the list. It will be loaded onto your Android device via the AI2 Companion app for testing.</li></ol><ol type="1" id="c2a2b8e1-ebcd-4e6e-bd6c-eb775191021c" class="numbered-list" start="7"><li>You can now interact with and test the sample project on your Android device using the AI2 Companion.</li></ol><div id="92ab5656-8219-46eb-b446-d561f3758109" class="column-list"><div id="afe7423b-fcbe-453c-bc77-76c9a5c5759b" style="width:50%" class="column"><figure id="a1765c12-cec0-4936-b70e-e0d7a12ff483" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%202.png"><img style="width:3337px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%202.png"/></a></figure></div><div id="1ecb7b14-39b0-40f4-b136-f5914a238d33" style="width:50%" class="column"><figure id="8090e9e3-070c-4d81-8b42-03a14ec27b81" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%203.png"><img style="width:3294px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%203.png"/></a></figure></div></div><p id="e8668857-0e60-46a4-b23a-931e95f84a6b" class="">
+</p><h3 id="1cc3ecf8-e486-436d-b171-4d298d3d429e" class="block-color-gray_background">To generate a QR Code link using the &quot;Connect AI Companion&quot; option:</h3><ol type="1" id="ecae1b0d-2aed-4634-bb7b-90fed71c7821" class="numbered-list" start="1"><li>Open MIT App Inventor on your computer.</li></ol><ol type="1" id="523ef221-49be-4b2f-bc2d-80eb75f73b7b" class="numbered-list" start="2"><li>Load or create the project you want to test with the AI Companion app.</li></ol><ol type="1" id="f6dad240-2cb6-4ce0-a5dc-bdcf0709202b" class="numbered-list" start="3"><li>Look for the &quot;Connect AI Companion&quot; or similar option within your development environment. This option is typically used to establish a connection between your computer and the AI Companion app on your Android device.</li></ol><ol type="1" id="5b881658-958e-4f5e-9036-d07d18db6ada" class="numbered-list" start="4"><li>Select &quot;Connect AI Companion.&quot; This will usually open a window or dialog where you can generate a QR Code link.</li></ol><ol type="1" id="9ff90cdb-a189-4244-b338-cedabb6a0df9" class="numbered-list" start="5"><li>A QR Code will be displayed on your computer screen. This QR Code contains a link that, when scanned by the AI Companion app on your Android device, establishes a connection between the two.</li></ol><ol type="1" id="f9e847cb-5fb6-4970-afcf-db787b729a09" class="numbered-list" start="6"><li>Use the AI2 Companion app on your Android device to scan the QR Code generated on your computer screen.</li></ol><ol type="1" id="0d84392e-b8d4-4149-90b2-f6464deb2228" class="numbered-list" start="7"><li>Once scanned successfully, your Android device will be connected to your project, and you can begin testing and interacting with it using the AI Companion.</li></ol><div id="40cdecea-ce97-4f1e-bc67-9d05a862d88f" class="column-list"><div id="8c08f388-dd2d-44ea-bb8c-597bc1a2302e" style="width:68.75%" class="column"><figure id="f5c39a0d-f506-4453-be3b-586d6a534a1d" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%204.png"><img style="width:528px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%204.png"/></a></figure></div><div id="2dc9c42f-b07d-4109-b6f2-7eb6830d6c2a" style="width:31.250000000000007%" class="column"><figure id="51227778-d90e-4a57-8bc2-b2a25349e7f8" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%205.png"><img style="width:240px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%205.png"/></a></figure></div></div><div id="c1d10361-a80e-48b6-8b54-933d0088bdbf" class="column-list"><div id="6fb818a2-f9d1-42df-8d78-98c83d3843ed" style="width:43.75%" class="column"><figure id="67268155-d363-464f-ba42-b57e394651f1" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%206.png"><img style="width:831px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%206.png"/></a></figure></div><div id="4c4e768c-c3e0-4428-908b-5eab602530b8" style="width:56.25%" class="column"><figure id="b835aef9-d3b8-4a5c-9120-8f913520845e" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%207.png"><img style="width:288px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%207.png"/></a></figure></div></div><p id="f2607dca-ede3-464e-b36b-39cb86d78324" class="">
+</p><h3 id="fd1944d4-2695-4ab1-842a-725277e7f14f" class="block-color-gray_background">After connecting the AI2 Companion, you can directly interact with your phone or use the mouse to click on the mirrored screen:</h3><ol type="1" id="ab7a295d-33e2-435e-abd4-5830463990d1" class="numbered-list" start="1"><li><strong>Direct Interaction</strong>: Your phone&#x27;s screen, mirrored on your computer, can be interacted with directly using your touchscreen. You can tap, swipe, and perform gestures as if you were using the phone itself.</li></ol><ol type="1" id="824a8ec5-c34c-4288-8259-44847b6e058f" class="numbered-list" start="2"><li><strong>Mouse Interaction</strong>: Alternatively, you can use the mouse connected to your computer to click, right-click, scroll, and drag on the mirrored phone screen. This allows for precise control using your computer&#x27;s input device.</li></ol><p id="dc2033cc-227a-4ee9-8042-8ddb330397bf" class="">These options make it convenient for testing and interacting with your app during development using the AI2 Companion. </p><div id="d3283552-63c9-45ef-a434-ea0ab788b505" class="column-list"><div id="e155d4e0-ab86-47d8-a628-3930befadb7d" style="width:43.75%" class="column"><figure id="e6edaaed-940f-4bfd-bfa0-e6b80ea45a2b" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%208.png"><img style="width:825px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%208.png"/></a></figure></div><div id="9dd05570-79e8-478e-905d-2e61a431fcf6" style="width:56.25%" class="column"><figure id="23797051-9c5c-4613-b6cc-c526aaf13004" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%209.png"><img style="width:288px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%209.png"/></a></figure><p id="ffb711db-15ba-4cde-a039-23ad721ee18c" class="">
+</p></div></div><p id="73582331-b656-4643-bb3e-dbacbdfaef4a" class="">
+</p><p id="ad8b9308-c917-49f9-9989-91a15ece8d8d" class="block-color-default">After connecting the AI2 Companion, any modifications made to your AI2 project during the design process will automatically update on the mirrored phone screen. There&#x27;s no need to disconnect and reconnect or manually upload changes. This real-time synchronization simplifies the development and testing process, ensuring that you can see the immediate effects of your design modifications on the mirrored screen in the AI2 Companion app.</p><div id="250aada9-d273-44e8-8ca3-8a9f2eea7a4d" class="column-list"><div id="b094c001-53fc-4ece-a475-9b63c463211b" style="width:62.5%" class="column"><figure id="c2625eb3-bc67-4b79-97e3-d0287529a394" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%2010.png"><img style="width:2254px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%2010.png"/></a></figure><p id="3a2b3c77-53d6-461a-810b-565df40b55d6" class="">
+</p></div><div id="056abfe9-24d4-4a05-8220-030e877be6df" style="width:37.49999999999999%" class="column"><figure id="86ead443-73e7-41ef-ac23-6c506f7a69e8" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%2011.png"><img style="width:240px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/Untitled%2011.png"/></a></figure></div></div><p id="ae3d3317-2956-4877-a630-35b1fd79ba4c" class="">
+</p><p id="dc7e3d72-2f90-4314-b992-36208800e0f2" class="">For more detailed instructions on how to operate the mirrored phone screen with a mouse, please refer to the Flipped Classroom Support Video. This video provides step-by-step guidance with visual demonstrations for a comprehensive understanding of the process.</p><p id="f0fba43d-c7ab-482c-8385-34734ec82f28" class="">
+</p><p id="130e210b-3c31-49ba-b370-1f9226bdbd3c" class="">
+</p><figure id="a488248b-d0d3-43b2-80a3-9f8c897bd6f5" class="image"><a href="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/4.png"><img style="width:1500px" src="Testing%20Your%20App%20Using%20MIT%20AI2%20Companion%207859f40873b14effbdaec0c64ce4555d/4.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
