@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>App Inventor 2 Basic Operations 1 - Overview of AI2</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="fd3d7839-f9d4-4cf5-82d2-948c796833c7" class="page sans"><header><img class="page-cover-image" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/app_inventor_01.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/yang-tr-wb.png"/></div><h1 class="page-title">App Inventor 2 Basic Operations 1 - Overview of AI2</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="1240c231-1cb8-47d0-9fa9-93806b4ce0c4" class="block-color-teal_background">References and Flipped Teaching Materials</h2><p id="3427a331-19d2-4f8b-a519-1111fda7401d" class="">
+</p><div id="82b1aee7-da62-4c09-9485-c3afce0da366" class="column-list"><div id="b17ce722-d190-4dc0-8598-cc099fdcd430" style="width:31.25%" class="column"><figure id="16b5190c-2980-4633-a3e5-8f0908d452d8" class="image"><a href="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled.png"><img style="width:192px" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled.png"/></a></figure></div><div id="87fca42d-4e46-4f2c-a8ad-d6533ec19fdc" style="width:68.75%" class="column"><figure id="22e83049-1158-49de-bb3a-77061d3d906d"><a  target="_blank" href="https://youtu.be/NjSV8_lhzHM" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">App Inventor 2 基本操作 1 - AI2 Basics</div><div class="bookmark-description">APP 程式設計實務 (2021 Fall)</div></div><div class="bookmark-href"><img src="https://www.youtube.com/s/desktop/18069be1/img/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/NjSV8_lhzHM</div></div><img src="https://i.ytimg.com/vi/NjSV8_lhzHM/hqdefault.jpg" class="bookmark-image"/></a></figure><p id="154f2c5d-73ea-42c6-a6d7-9c921a04f6cc" class="">
+</p></div></div><figure id="32b5cf40-8045-456a-81cf-fd96c3d3d377"><a  target="_blank" href="https://appinventor.mit.edu/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">MIT App Inventor | Explore MIT App Inventor</div><div class="bookmark-description">App Inventor open job position MIT App Inventor has an immediate opening for an additional member of our development team. We&#x27;re looking for an experienced developer who can join us in the support and evolution of the App Inventor platform, including our new work in conversational AI.</div></div><div class="bookmark-href">https://appinventor.mit.edu/</div></div><img src="https://appinventor.mit.edu/images/CTCommendation/Resource%20School.png" class="bookmark-image"/></a></figure><div id="c63edbe9-e9dc-486f-801f-5cff339f429d" class="column-list"><div id="4ca5e8d3-5a7f-406a-a460-f6aad7e06791" style="width:50%" class="column"><figure id="53040e48-e0da-403c-b7ba-e22483828146"><a href="http://ai2.appinventor.mit.edu/reference/components/userinterface.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">User Interface</div><div class="bookmark-description">&quot; Back to index Table of Contents: Button with the ability to detect clicks. Many aspects of its appearance can be changed, as well as whether it is clickable ( Enabled). Its properties can be changed in the Designer or in the Blocks Editor. BackgroundColor Enabled Specifies whether the Button should be active and clickable.</div></div><div class="bookmark-href"><img src="http://ai2.appinventor.mit.edu/favicon.ico" class="icon bookmark-icon"/>http://ai2.appinventor.mit.edu/reference/components/userinterface.html</div></div><img src="http://ai2.appinventor.mit.edu/static/images/logo2.png" class="bookmark-image"/></a></figure></div><div id="be61546e-753c-486c-8dc3-646ab8b33dbb" style="width:50%" class="column"><figure id="1012d6b7-e99b-45ec-85b8-6331c0172754"><a href="http://ai2.appinventor.mit.edu/reference/blocks/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">MIT App Inventor Built-in Blocks</div><div class="bookmark-description">Built-in blocks are available regardless of which components are in your project. In addition to these language blocks, each component in your project has its own set of blocks specific to its own events, methods, and properties. This is an overview of all of the Built-In Blocks available in the Blocks Editor.</div></div><div class="bookmark-href"><img src="http://ai2.appinventor.mit.edu/favicon.ico" class="icon bookmark-icon"/>http://ai2.appinventor.mit.edu/reference/blocks/</div></div><img src="http://ai2.appinventor.mit.edu/static/images/logo2.png" class="bookmark-image"/></a></figure></div></div><h2 id="d9546b7c-32c3-43c5-a4a0-522604e9e142" class="block-color-teal_background">Curriculum Design</h2><h3 id="ce6147a3-37cd-4ddc-b931-664c7edcc794" class="block-color-gray_background">App Inventor 2 (AI2) offers a wealth of comprehensive online reference materials.</h3><p id="818ea747-9b34-44a8-95ba-ec1cbe2cef8a" class="">MIT App Inventor built-in blocks are the basic building blocks of App Inventor programs. They are available regardless of which components are in your project. Built-in blocks can be used to perform a wide variety of tasks, including:</p><ul id="c2e7f67e-d640-4746-8d2e-42a6c63fcb69" class="bulleted-list"><li style="list-style-type:disc">Controlling the flow of a program</li></ul><ul id="6d7c1351-329e-4ee0-8e73-30eaaddcc874" class="bulleted-list"><li style="list-style-type:disc">Performing mathematical operations</li></ul><ul id="f8a4233a-2103-4566-bd65-abf847a6ff4f" class="bulleted-list"><li style="list-style-type:disc">Manipulating text and lists</li></ul><ul id="b6722976-8d28-400d-b606-3fb32d79b232" class="bulleted-list"><li style="list-style-type:disc">Communicating with the device&#x27;s hardware and sensors</li></ul><p id="583aff21-3c2f-4835-8048-a62d0e247a15" class="">Built-in blocks are organized into the following categories:</p><ul id="ecb51bee-790e-4a5c-993e-31c9415032d5" class="bulleted-list"><li style="list-style-type:disc">Control blocks: These blocks allow you to control the flow of a program, such as by creating loops, conditional statements, and procedures.</li></ul><ul id="f67dfb3c-8918-4041-9cd1-7b6dac7205ef" class="bulleted-list"><li style="list-style-type:disc">Logic blocks: These blocks allow you to perform logical operations, such as AND, OR, and NOT.</li></ul><ul id="31f2cd9c-7ed7-46a3-a2e7-27e931dc5776" class="bulleted-list"><li style="list-style-type:disc">Math blocks: These blocks allow you to perform mathematical operations, such as addition, subtraction, multiplication, and division.</li></ul><ul id="37f63ceb-3289-4275-bf25-fb05599c917f" class="bulleted-list"><li style="list-style-type:disc">Text blocks: These blocks allow you to manipulate text, such as by converting it to upper or lowercase, extracting a substring, or joining two strings together.</li></ul><ul id="8418c8a7-352f-400b-8187-13901b7729a1" class="bulleted-list"><li style="list-style-type:disc">Lists blocks: These blocks allow you to manipulate lists, such as creating a new list, adding or removing items from a list, and sorting a list.</li></ul><p id="0c933e6e-f332-4c54-ac37-47b3203d084a" class="">To use a built-in block, simply drag it from the Blocks Palette onto the Designer. You can then connect the block to other blocks to create a program.</p><p id="80fbe640-c85a-4249-94f5-d2105a8dc5d1" class="">Here are some examples of how built-in blocks can be used:</p><ul id="1658073c-eefb-423a-a53e-0777b9ac1598" class="bulleted-list"><li style="list-style-type:disc">To create a button that opens a new screen when it is clicked, you would use a <strong>Button.Click</strong> event block and a <strong>Screen.Open</strong> block.</li></ul><ul id="5c0c7d2e-c8db-4d73-bc6b-b93c73a943d3" class="bulleted-list"><li style="list-style-type:disc">To calculate the area of a triangle, you would use a <strong>Math.Multiply</strong> block to multiply the base and height of the triangle.</li></ul><ul id="b7e1b305-3b9b-4f17-beb7-4e1eb3fa8c5f" class="bulleted-list"><li style="list-style-type:disc">To display a message to the user, you would use a <strong>Label.Text</strong> block to set the text of a label to the message.</li></ul><ul id="07c687c9-d247-4caa-a91b-99162e602fed" class="bulleted-list"><li style="list-style-type:disc">To create a list of all the files in a directory, you would use a <strong>File.List</strong> block.</li></ul><p id="346579b6-73a6-47e2-8078-5a4ca35cf680" class="">Built-in blocks are a powerful tool that can be used to create a wide variety of apps. By learning how to use built-in blocks, you can create apps that can perform all sorts of tasks, from simple to complex.</p><figure id="1a4f1704-9ae7-47a2-9525-869c1d9ca7f8" class="image"><a href="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%201.png"><img style="width:3355px" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%201.png"/></a></figure><p id="581b07c8-f192-4cff-9a54-5d96394e6130" class="">
+</p><h3 id="fff7f6ec-e2db-4e88-bbf3-0c180d2ff1db" class="block-color-gray_background">The official website of AI2 also provides very comprehensive introductory learning materials.</h3><p id="7eb87e7a-8f91-436a-bef9-dc4ead1b8082" class="">The official online learning resource for MIT App Inventor is the <strong>App Inventor Tutorials</strong> page. This page contains a variety of tutorials of all levels, from beginner to advanced. The tutorials cover a wide range of topics, including:</p><ul id="c64a64b1-318e-4569-b99a-007ff90b4a62" class="bulleted-list"><li style="list-style-type:disc">Getting started with App Inventor</li></ul><ul id="1f95bef1-40b0-4d07-8237-75753fe5cdaa" class="bulleted-list"><li style="list-style-type:disc">Building basic apps</li></ul><ul id="75177042-d260-4a70-92fd-ad6e962fc937" class="bulleted-list"><li style="list-style-type:disc">Using components</li></ul><ul id="aa013076-4be8-4a42-a28f-70e6d3bc7d40" class="bulleted-list"><li style="list-style-type:disc">Creating user interfaces</li></ul><ul id="3978a40c-8873-497d-a946-620937c273d2" class="bulleted-list"><li style="list-style-type:disc">Adding functionality</li></ul><ul id="76d25b6c-7331-4172-aa3e-c3886e156851" class="bulleted-list"><li style="list-style-type:disc">Testing and debugging apps</li></ul><ul id="8ad06db4-8c65-43f4-9761-0dac9f0f8d1e" class="bulleted-list"><li style="list-style-type:disc">Publishing apps</li></ul><p id="1cb6ebc8-86b4-4631-9d10-8bc09f228c7c" class="">The tutorials are well-written and easy to follow, and they include step-by-step instructions with screenshots. There are also video tutorials available for some of the topics.</p><p id="39d7ee9f-7e13-4567-aa70-a7b7b140dfca" class="">In addition to the tutorials, the App Inventor website also includes a variety of other resources, such as:</p><ul id="a347a57f-ec84-454d-ad15-4e4cb0096de0" class="bulleted-list"><li style="list-style-type:disc">A <strong>Documentation</strong> page that contains detailed information about all aspects of App Inventor</li></ul><ul id="6a8a23c1-2c53-4a4c-a685-55129545f29c" class="bulleted-list"><li style="list-style-type:disc">A <strong>Community Forum</strong> where users can ask questions and get help from other App Inventor users</li></ul><ul id="0669b401-fa49-482c-9d34-44fd536c692e" class="bulleted-list"><li style="list-style-type:disc">A <strong>Samples Gallery</strong> that contains a collection of sample apps that users can download and learn from</li></ul><p id="167e1d41-4b7c-4dfc-9baa-52a0bff03508" class="">The official online learning resource for MIT App Inventor is a great place to learn how to build apps with App Inventor. It is free to use and it is available to anyone, regardless of their experience level.</p><p id="31cf4c29-1d97-4654-9245-b1e19a327350" class="">Here are some tips for using the App Inventor Tutorials page:</p><ul id="c6162aa3-2701-4233-bba6-d90cb715cd74" class="bulleted-list"><li style="list-style-type:disc">Start with the beginner tutorials to learn the basics of App Inventor.</li></ul><ul id="82a891df-483d-4bbb-ab3a-d6b7308a553c" class="bulleted-list"><li style="list-style-type:disc">Once you have learned the basics, you can start working on the more advanced tutorials.</li></ul><ul id="de7207c0-c69d-4d34-b5ae-c083de862a8b" class="bulleted-list"><li style="list-style-type:disc">Don&#x27;t be afraid to experiment and try new things.</li></ul><ul id="14063b87-1a9d-4245-b77f-579bfc4cccb5" class="bulleted-list"><li style="list-style-type:disc">If you get stuck, ask for help on the Community Forum.</li></ul><ul id="ea521288-6fb8-479d-bca9-58c64166245f" class="bulleted-list"><li style="list-style-type:disc">There is no right or wrong way to build an app with App Inventor. Have fun and be creative!</li></ul><figure id="8be4c442-a9f4-499f-b211-8f1d3a08af41" class="image"><a href="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%202.png"><img style="width:3337px" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%202.png"/></a></figure><p id="80bb9b5c-f674-45f6-ab4e-faf8fb68e3dc" class="">
+</p><h3 id="32715a07-b45e-4468-9f53-26d615c8477d" class="block-color-gray_background">Exercise: Open an existing App Inventor project or create a new one.</h3><p id="006e0fbe-e477-4c35-ae90-cf403b81869a" class="">In this exercise, we will explore how to work with MIT App Inventor, a powerful platform for creating mobile applications without the need for extensive coding. In this session, we will focus on two essential tasks: opening an existing App Inventor project and creating a new one.</p><p id="547a297c-24f4-4ee8-80f0-8a95662709ee" class=""><strong>Opening an Existing Project</strong></p><ol type="1" id="03e1a7bf-84dd-4fa0-9458-57fa29fdbc4b" class="numbered-list" start="1"><li>Accessing App Inventor:<ul id="955b584b-204d-4b3a-bfe3-5f013121c152" class="bulleted-list"><li style="list-style-type:disc">Launch a web browser and navigate to the MIT App Inventor website (<a  target="_blank" href="https://appinventor.mit.edu/"><strong>https://appinventor.mit.edu/</strong></a>).</li></ul><ul id="69c0eeda-549e-45dc-b44b-857259664ac2" class="bulleted-list"><li style="list-style-type:disc">Log in to your App Inventor account using your credentials.</li></ul></li></ol><ol type="1" id="8b30e288-c54f-46e2-a1a6-93edf7eef8d6" class="numbered-list" start="2"><li>Opening an Existing Project:<ul id="8d65dbb9-c315-4309-ab1f-b0409054f3d5" class="bulleted-list"><li style="list-style-type:disc">After logging in, you will be directed to the &quot;My Projects&quot; page.</li></ul><ul id="fdb3ac04-b374-4267-a704-8941f3fd392f" class="bulleted-list"><li style="list-style-type:disc">Locate the project you want to open in the project list.</li></ul><ul id="36cc1a13-7351-48dd-b076-539f2a911df4" class="bulleted-list"><li style="list-style-type:disc">Click on the project&#x27;s name to open it in the App Inventor interface.</li></ul><ul id="3e96f342-60d4-4def-9426-b8a6aff8fd6f" class="bulleted-list"><li style="list-style-type:disc">You are now ready to work on your existing project.</li></ul></li></ol><p id="02c68b99-b894-4cf9-b486-e809c8e973e6" class=""><strong>Creating a New Project</strong></p><ol type="1" id="9de3e90c-5b2d-43d2-b167-d3f1d5725c99" class="numbered-list" start="1"><li>Starting a New Project:<ul id="c870ca63-3177-4e39-9fe7-cfb6b1c934eb" class="bulleted-list"><li style="list-style-type:disc">From the &quot;My Projects&quot; page, click on the &quot;Start New Project&quot; button.</li></ul><ul id="34eb6642-c139-40bb-a3bd-aad2a6094e46" class="bulleted-list"><li style="list-style-type:disc">A dialog box will appear. Enter a suitable name for your new project and click &quot;OK.&quot;</li></ul></li></ol><ol type="1" id="f3b45441-97c6-4a40-af04-57c6fb5af741" class="numbered-list" start="2"><li>The App Inventor Interface:<ul id="880cfe07-b39e-42f3-9b78-c66b9b5e2369" class="bulleted-list"><li style="list-style-type:disc">Once your new project is created, you will be taken to the App Inventor interface.</li></ul><ul id="b74c5bda-6617-4b12-8c1f-37f098f996d5" class="bulleted-list"><li style="list-style-type:disc">Here, you can see the components, blocks editor, and the viewer for your app&#x27;s design.</li></ul><ul id="fef7fcb7-3942-415d-a69f-d8744b35b6c2" class="bulleted-list"><li style="list-style-type:disc">You are now ready to start building your new app from scratch.</li></ul></li></ol><p id="6d49a441-a680-44b4-a4cc-579bde8cce1a" class="">In today&#x27;s session, we&#x27;ve learned how to open an existing App Inventor project and create a new one. Whether you&#x27;re continuing your work on a previous project or embarking on a new mobile app journey, App Inventor provides a user-friendly platform for all your app development needs.</p><div id="4c3cf7c2-5cae-421a-a5c9-a03ac186c992" class="column-list"><div id="e4e03fea-fdee-46e5-911d-c078731b4b9a" style="width:37.5%" class="column"><p id="da957b97-6992-4c8b-a7ad-b525d923e2ff" class="block-color-yellow">The design and use of AI2 projects are entirely done online. Currently, it&#x27;s not possible to develop AI2 applications locally on your machine. However, you can backup and download your projects</p><figure id="a25c58b1-036e-4f8b-8aa8-26e96c1af74d" class="image"><a href="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%203.png"><img style="width:2115px" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%203.png"/></a></figure></div><div id="c2d3c19c-9e5c-4c11-b75a-b401b9d71ce3" style="width:62.5%" class="column"><figure id="bbecb928-8b3e-4630-b2ad-a807b01ce571" class="image"><a href="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%204.png"><img style="width:432px" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%204.png"/></a></figure></div></div><p id="49d91976-59ad-4123-80bd-d79be29a0ac5" class="">
+</p><h3 id="e980d0d4-0d10-422e-bc4a-efc5e0498031" class="block-color-gray_background">Exercise: User Interface (UI) Design for AI2 Projects</h3><p id="e2fc8302-cb18-473c-83f8-07c2aba07e4b" class="">In this exercise, we will explore the fundamentals of User Interface (UI) Design for AI2 (MIT App Inventor 2) projects. Just as &quot;Hello, world!&quot; is the simplest program in many programming languages, we&#x27;ll start with a basic UI design to get you started.</p><p id="f69ce953-5f40-4d51-b9ec-0f5106055bc7" class=""><strong>Creating a Simple UI</strong></p><ol type="1" id="f37e5f46-124e-44d9-865d-64f0e6ca350d" class="numbered-list" start="1"><li><strong>Accessing App Inventor:</strong><ul id="e17d55b1-a81e-47dd-a779-ad09ce7356ec" class="bulleted-list"><li style="list-style-type:disc">Open a web browser and go to MIT App Inventor (<a  target="_blank" href="https://appinventor.mit.edu/"><strong>https://appinventor.mit.edu/</strong></a>).</li></ul><ul id="6cf6776c-3575-4729-a2d5-e942a104bd54" class="bulleted-list"><li style="list-style-type:disc">Log in to your App Inventor account if you haven&#x27;t already.</li></ul></li></ol><ol type="1" id="00221eeb-2337-4f63-9d84-e562ba1a1e0d" class="numbered-list" start="2"><li><strong>Starting a New Project:</strong><ul id="cb57a74b-4ad2-4ea8-bbc8-718fe1f115e8" class="bulleted-list"><li style="list-style-type:disc">Click on &quot;Start New Project.&quot;</li></ul><ul id="caf197ea-0a3f-4bed-9024-fd3bf6a72668" class="bulleted-list"><li style="list-style-type:disc">Enter a project name, and make sure it&#x27;s set to &quot;Phone/Tablet&quot; for the target device.</li></ul><ul id="15d3481e-c23e-4ce0-b8bd-efc985298a2e" class="bulleted-list"><li style="list-style-type:disc">Click &quot;OK&quot; to create your project.</li></ul></li></ol><ol type="1" id="e89aec34-75c8-4ace-ab55-20ab2e71ee6a" class="numbered-list" start="3"><li><strong>Designing the UI:</strong><ul id="22216c89-a927-4ba8-b0e6-232c2ae37180" class="bulleted-list"><li style="list-style-type:disc">In the App Inventor interface, you&#x27;ll see a visual designer. It&#x27;s divided into two main sections: the Viewer and the Palette.</li></ul><ul id="e0f73f7c-7653-4e49-bdb0-c2d3650ab1fc" class="bulleted-list"><li style="list-style-type:disc">Drag and drop components from the Palette onto the Viewer to create your UI.</li></ul><ul id="7d33a4db-11cc-43d1-9b6d-193eff573e5a" class="bulleted-list"><li style="list-style-type:disc">For our &quot;Hello, world!&quot; example, add:<ul id="cc3ea9dd-7a4f-4a91-9dda-ce72e6f32eec" class="bulleted-list"><li style="list-style-type:circle"><strong>Label:</strong> Drag a Label component to the Viewer.</li></ul><ul id="b1d14e87-f4b7-4b86-89c6-1abec85be393" class="bulleted-list"><li style="list-style-type:circle"><strong>Button:</strong> Drag a Button component to the Viewer below the label.</li></ul></li></ul></li></ol><ol type="1" id="8f764872-70a8-4705-9e02-13a6c67caf96" class="numbered-list" start="4"><li><strong>Customize Components:</strong><ul id="0d4efb48-a6be-4e59-b80e-b9acf601c95d" class="bulleted-list"><li style="list-style-type:disc">Select the Label component, and in the Properties panel, change the &quot;Text&quot; property to &quot;Hello, world!&quot;</li></ul><ul id="f73cadc8-3312-48de-a826-3500fbfd304f" class="bulleted-list"><li style="list-style-type:disc">For the Button component, set the &quot;Text&quot; property to &quot;Click Me!&quot;</li></ul></li></ol><ol type="1" id="d3742d68-63bd-4d68-adeb-25980122b78f" class="numbered-list" start="5"><li><strong>Testing Your UI:</strong><ul id="0bcba8bc-1fd4-4579-94f9-648104f06796" class="bulleted-list"><li style="list-style-type:disc">Click on the &quot;Blocks&quot; button to open the Blocks editor.</li></ul><ul id="bea377ce-3a24-4032-98f9-c8bee8331f17" class="bulleted-list"><li style="list-style-type:disc">In the Blocks editor, create a &quot;when Button.Click&quot; block.</li></ul><ul id="659d2d33-904d-46c3-98cd-06f79073849f" class="bulleted-list"><li style="list-style-type:disc">Inside this block, use the &quot;Set Label.Text&quot; block to change the text of the label to &quot;Hello, App Inventor!&quot; when the button is clicked.</li></ul><ul id="16b35e0b-59a9-4c64-8e6a-0eb75c9d539d" class="bulleted-list"><li style="list-style-type:disc">Click the &quot;Connect to device&quot; button to test your app on an Android device or emulator.</li></ul></li></ol><ol type="1" id="245514f8-90c0-4f18-abc3-d0e1d8a2b8b4" class="numbered-list" start="6"><li><strong>Running Your App:</strong><ul id="c0af97b4-eadb-424c-9c14-c7eee431ffbc" class="bulleted-list"><li style="list-style-type:disc">Install and run the app on your device or emulator.</li></ul><ul id="bf887f38-e323-4668-a665-47858b3e0881" class="bulleted-list"><li style="list-style-type:disc">When you click the &quot;Click Me!&quot; button, the label should change to &quot;Hello, App Inventor!&quot;</li></ul></li></ol><ol type="1" id="9a4ba481-37e4-40f3-9785-dc7012ca3e41" class="numbered-list" start="7"><li><strong>Saving Your Project:</strong><ul id="26d7a916-af0f-4c78-93f6-d4e535edb1e8" class="bulleted-list"><li style="list-style-type:disc">Remember to save your project by clicking the floppy disk icon in the top left corner.</li></ul></li></ol><p id="582579f9-1846-473b-a7a9-af89a132875a" class="">In this introductory session, we&#x27;ve created a simple UI for an AI2 project, just like the &quot;Hello, world!&quot; example in various programming languages. This basic example showcases the essential components and steps required for UI design in App Inventor.</p><p id="d58124fa-bae2-4893-9ee7-78d9dd0dab21" class="">As you progress, you can enhance your UI and add more functionality to your AI2 projects. Experiment with different components and explore the vast possibilities of mobile app development using MIT App Inventor.</p><div id="3ba8c5ee-5e00-431f-9a73-1dd49c3daeb1" class="column-list"><div id="3c2c42dc-860e-473e-981d-34643c3042a2" style="width:37.5%" class="column"><figure id="5332d77b-5bd3-4c07-829f-842541d06100" class="image"><a href="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%205.png"><img style="width:1781px" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%205.png"/></a></figure></div><div id="e286731c-f96b-4765-b39f-1f67ebc00fd0" style="width:62.5%" class="column"><figure id="351bc709-e80b-4f69-9dc6-eab03d44fe71" class="image"><a href="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%206.png"><img style="width:3298px" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%206.png"/></a></figure></div></div><p id="5fef2be7-3c49-4f45-bc06-ac5343efb496" class="">
+</p><h3 id="bddd9ad3-012b-4a67-af4a-6c69d435098e" class="block-color-gray_background">Exercise: Blockly Programming for AI2 UI Components</h3><p id="8eeac431-f679-48ac-90f1-f04ce1e6ee43" class="">In this exercise, we will explore how to create a simple click counter using Blockly programming in AI2 (MIT App Inventor 2). This hands-on session will help you understand how to manipulate variables and UI components to build interactive mobile apps.</p><p id="ef1ebe7a-1f66-436d-941f-bf967bb2f647" class=""><strong>Setting Up the Environment:</strong></p><ol type="1" id="dcc30637-499c-49e4-aaf7-ea0497ec7b91" class="numbered-list" start="1"><li>Open a web browser and navigate to MIT App Inventor (<a  target="_blank" href="https://appinventor.mit.edu/"><strong>https://appinventor.mit.edu/</strong></a>).</li></ol><ol type="1" id="a967c58d-25db-43ac-882a-d2158fa51cc2" class="numbered-list" start="2"><li>Log in to your App Inventor account if you haven&#x27;t already.</li></ol><p id="53976959-f233-40e9-af05-425438a9ed23" class=""><strong>Creating a New Project:</strong></p><ol type="1" id="9f4cdcf8-0de4-494d-a60c-79fef8ab7ec2" class="numbered-list" start="1"><li>Click on &quot;Start New Project.&quot;</li></ol><ol type="1" id="e78ff47d-b9fa-42d6-8a87-8ff2c7eb90e5" class="numbered-list" start="2"><li>Enter a project name and ensure it&#x27;s set to &quot;Phone/Tablet&quot; for the target device.</li></ol><ol type="1" id="7b44c587-2c81-4ad6-b16e-4a143e3a70f1" class="numbered-list" start="3"><li>Click &quot;OK&quot; to create your project.</li></ol><p id="d25098a5-4943-498a-9902-1d218addc352" class=""><strong>Designing the UI:</strong></p><ol type="1" id="d6d66b13-2ff7-4ad6-9528-0fff84066989" class="numbered-list" start="1"><li>In the App Inventor interface, locate the visual designer, which comprises the Viewer and the Palette.</li></ol><ol type="1" id="63baf898-4c1d-48ed-9728-5b66b68ef9b1" class="numbered-list" start="2"><li>Add the following UI components to the Viewer:<ul id="321fc5e1-c0dd-4198-a8a0-f56246d61b43" class="bulleted-list"><li style="list-style-type:disc">Label: Drag and drop a Label component to display the click count.</li></ul><ul id="adbb8fae-ab69-47f0-852a-8d7a69984921" class="bulleted-list"><li style="list-style-type:disc">Button: Add a Button component with the text &quot;Click Me!&quot;</li></ul></li></ol><ol type="1" id="594eb8db-3cd5-46e8-b2b8-a6c3950ddaca" class="numbered-list" start="3"><li>Customize Component Properties:<ul id="d347e6fa-3d03-4d7d-b56f-d635ddf7c252" class="bulleted-list"><li style="list-style-type:disc">Select the Label and set its &quot;Text&quot; property to &quot;Clicks: 0&quot;</li></ul></li></ol><p id="29a0ce9c-7e72-4ac2-ad69-bbec74e8ab2c" class=""><strong>Blockly Programming:</strong></p><ol type="1" id="b2e10c20-d5f0-455b-8164-fb3273bd590e" class="numbered-list" start="1"><li>Click the &quot;Blocks&quot; button to open the Blocks editor.</li></ol><ol type="1" id="bc60aecc-1fe1-4644-8c59-c7a7946f6730" class="numbered-list" start="2"><li>Create a Blockly variable called &quot;ClickCount.&quot;</li></ol><ol type="1" id="27d377b7-8164-403d-9588-16e9ce0f4563" class="numbered-list" start="3"><li>Set the initial value of &quot;ClickCount&quot; to 0.</li></ol><ol type="1" id="3e9daf41-4f69-4f5a-805b-a1ba08aeb0d1" class="numbered-list" start="4"><li>Create a Blockly block that responds to the Button&#x27;s &quot;Click&quot; event.</li></ol><ol type="1" id="55b3a717-e93b-4157-bdc3-86e2a5f6311d" class="numbered-list" start="5"><li>Inside this block, use Blockly logic to:<ul id="aaba857d-6d05-49ec-8b13-fb6556206e57" class="bulleted-list"><li style="list-style-type:disc">Increment the &quot;ClickCount&quot; variable by 1.</li></ul><ul id="b28c2e31-7fc0-4228-ae02-9219d596f949" class="bulleted-list"><li style="list-style-type:disc">Update the text of the Label to display the new click count.</li></ul></li></ol><p id="c05ac083-d881-4e6c-ad25-10cd939efd21" class=""><strong>Testing Your App:</strong></p><ol type="1" id="ab1a715a-7a79-4d1e-8710-18fb2dccdfd8" class="numbered-list" start="1"><li>Connect to a device or emulator using the &quot;Connect to device&quot; button.</li></ol><ol type="1" id="fd8a74b0-2456-4d66-b002-96c3b136182f" class="numbered-list" start="2"><li>Install and run your app on the device or emulator.</li></ol><ol type="1" id="0925099a-9d64-4f37-8b39-970157a2ee3c" class="numbered-list" start="3"><li>Test the app by clicking the &quot;Click Me!&quot; button. Observe how the click count increases with each click.</li></ol><p id="8f7c6307-bf36-4da6-a9bd-212880593e0a" class=""><strong>Conclusion:</strong></p><p id="06277159-dd4e-4e94-97e7-0fe7936153c4" class="">In this exercise, we&#x27;ve created a simple click counter using Blockly programming in AI2. By manipulating variables and UI components, you&#x27;ve learned how to build interactive mobile apps. This exercise serves as a foundation for more advanced app development tasks in MIT App Inventor.</p><p id="fc212c53-64f4-42ef-a22a-4032094cec76" class="">Feel free to experiment further with Blockly and UI components to expand your skills in mobile app development.</p><div id="c2b4a79c-a5a3-4232-8073-0b97140494dd" class="column-list"><div id="e1f8561a-48f5-41bf-a7e0-d38a053e0c98" style="width:37.5%" class="column"><p id="4ad1fedd-52f1-4712-8096-c6dc44521bf6" class="block-color-yellow">Utilizing Blockly Programming for the Corresponding Processing Flow of UI Components.</p><figure id="648f9cad-688e-4352-92ea-30f074513368" class="image"><a href="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%207.png"><img style="width:2099px" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%207.png"/></a></figure></div><div id="60bf742d-8f18-4668-841a-931b330d0243" style="width:62.5%" class="column"><figure id="8ab3313f-cf84-4b16-9b20-2bc5bb95f153" class="image"><a href="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%208.png"><img style="width:3351px" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/Untitled%208.png"/></a></figure></div></div><p id="2be98d3a-6cc7-4d4c-916d-e5298d6248b9" class="">
+</p><p id="0f985492-40f4-455b-b565-227309f8cce2" class="">
+</p><p id="296255b8-cb06-4205-8b9f-813b8b4ab347" class="">
+</p><figure id="9858cadd-9cbf-4c78-96cd-d95bf46e35ac" class="image"><a href="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/15.png"><img style="width:1500px" src="App%20Inventor%202%20Basic%20Operations%201%20-%20Overview%20of%20AI%20fd3d7839f9d44cf582d2948c796833c7/15.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
