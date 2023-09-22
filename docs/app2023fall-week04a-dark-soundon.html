@@ -1,0 +1,688 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>App Inventor 2 Basic Operations 2 - AI2 Palette  &amp; Layout</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="3a840d0a-8978-46ad-87b3-fe37d333674d" class="page sans"><header><img class="page-cover-image" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/app_inventor_01.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/yang-tr-wb.png"/></div><h1 class="page-title">App Inventor 2 Basic Operations 2 - AI2<strong> Palette </strong> &amp; Layout</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="debc3782-692f-4cd1-946d-84205a73ed7a" class="block-color-teal_background">References and Flipped Teaching Materials</h2><div id="f3303db9-4f0e-46f9-9536-77289ec82d14" class="column-list"><div id="0d90abde-efa8-4dd0-a552-38b7ba70e0e7" style="width:31.25%" class="column"><figure id="0f90df49-2b2c-42c3-bb44-61b2cba4fda9" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled.png"><img style="width:296px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled.png"/></a></figure></div><div id="6f15e1da-a2a1-4fe0-b7b4-ac80e5b54e1e" style="width:68.75%" class="column"><figure id="f0d935c4-705a-4bc7-aa9d-0ebdb8a74dd1"><a  target="_blank" href="https://youtu.be/S5K05BJsc0I" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">App Inventor 2 - UI Layout 設計</div><div class="bookmark-description">APP 程式設計實務 (2021 Fall)</div></div><div class="bookmark-href"><img src="https://www.youtube.com/s/desktop/18069be1/img/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/S5K05BJsc0I</div></div><img src="https://i.ytimg.com/vi/S5K05BJsc0I/hqdefault.jpg" class="bookmark-image"/></a></figure></div></div><figure id="9359c0c4-a52b-4ad0-a632-4e9f8eb5d719"><a href="http://ai2.appinventor.mit.edu/reference/components/layout.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Layout</div><div class="bookmark-description">&quot; Back to index Table of Contents: Use a horizontal arrangement component to display a group of components laid out from left to right. This component is a formatting element in which you place components that should be displayed from left to right. If you want to have components displayed one over another, use VerticalArrangement instead.</div></div><div class="bookmark-href"><img src="http://ai2.appinventor.mit.edu/favicon.ico" class="icon bookmark-icon"/>http://ai2.appinventor.mit.edu/reference/components/layout.html</div></div><img src="http://ai2.appinventor.mit.edu/static/images/logo2.png" class="bookmark-image"/></a></figure><h2 id="c29f83fd-afa4-40c7-9776-c7027c4ba035" class="block-color-teal_background">Curriculum Design</h2><h3 id="91342c26-151b-4b09-a6df-e33bfe06bed2" class="block-color-gray_background"><strong>AI2 UI Component Selection (Palette) </strong></h3><figure id="eef6580b-99f7-44d3-8f74-c35e3fe88ef3" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%201.png"><img style="width:3333px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%201.png"/></a></figure><p id="cb28e72a-5e4f-4af5-991e-8129150a4430" class=""><strong>User Interface Palette</strong></p><p id="fc70edf7-1d3f-4baa-b740-61ca88c112c0" class="">The User Interface Palette is where you will find all the components you need to build the user interface (UI) of your app. The components are grouped by functionality, making it easy to find the right component for your needs.</p><p id="ae791beb-59ce-4b0e-82fb-97ec17f11f6a" class=""><strong>Component Selection</strong></p><p id="8433278a-32a5-4c92-8c24-2224f01f5e41" class="">To select a component, simply click on it in the palette. The component will then be added to the Viewer, which is the area where you can design your app&#x27;s UI.</p><p id="f1677905-7218-44cd-9b75-3756ed6e0206" class=""><strong>Interface Layout</strong></p><p id="6455827c-30b5-4e06-a81f-58892577306f" class="">Once you have added some components to the Viewer, you can start to arrange them in a layout. Layouts help to format components so they are attractive and organized on the screen.</p><p id="5318cb83-3609-431f-9273-e583b373469d" class="">There are many different types of layouts available in App Inventor. Some of the most common layouts include:</p><ul id="dcdfdda6-31b4-43bf-9fe6-bc4308c29ce7" class="bulleted-list"><li style="list-style-type:disc"><strong>HorizontalArrangement:</strong> Arranges components in a horizontal line.</li></ul><ul id="b406ca4e-2f5d-461c-9f67-29ea2ed7cf1f" class="bulleted-list"><li style="list-style-type:disc"><strong>VerticalArrangement:</strong> Arranges components in a vertical line.</li></ul><ul id="87528407-ca5b-4dc5-9945-7b904fe7601d" class="bulleted-list"><li style="list-style-type:disc"><strong>RelativeLayout:</strong> Allows you to position components relative to each other.</li></ul><ul id="5431672d-7d61-43a9-84a7-f20d691492d4" class="bulleted-list"><li style="list-style-type:disc"><strong>TableArrangement:</strong> Arranges components in a table format.</li></ul><p id="4ef7cee8-ba30-4797-b8a1-8a867580f05b" class="">To add a layout to your app, simply click on the layout you want to use in the palette and drag it to the Viewer. The layout will then be added to the Viewer and you can start to add components to it.</p><p id="233bb7bf-e86e-4dc6-b1bd-26e144cc2660" class=""><strong>Component Properties</strong></p><p id="e54c540a-e0d3-4a23-86c3-1200ccd2c7c6" class="">Once you have added a component to a layout, you can change its properties to customize its appearance and behavior. To change a component&#x27;s properties, simply select the component in the Viewer and its properties will be displayed in the Properties panel on the right side of the screen.</p><p id="0b8ca428-c59c-457c-b1b4-21ba8dc8ecc5" class="">Some of the most common component properties include:</p><ul id="880431e7-f227-483c-9201-88df28d892e5" class="bulleted-list"><li style="list-style-type:disc"><strong>Text:</strong> The text that is displayed on the component.</li></ul><ul id="28be2ae5-5778-4f76-b0ad-6caf6a318129" class="bulleted-list"><li style="list-style-type:disc"><strong>Background color:</strong> The background color of the component.</li></ul><ul id="3f78b698-743e-41ff-aca9-e8d7924c4d87" class="bulleted-list"><li style="list-style-type:disc"><strong>Font size:</strong> The size of the font used to display text on the component.</li></ul><ul id="764ad8a6-1da0-4c95-9e8a-a8e4e8d0c7cc" class="bulleted-list"><li style="list-style-type:disc"><strong>Enabled:</strong> Whether or not the component is enabled.</li></ul><p id="115d6928-ff8f-4ae4-af25-b481c8559c46" class="">
+</p><h3 id="3525f717-5fd2-416f-82e4-329ac4719e96" class="block-color-gray_background">In the absence of assistance with interface layout elements, it is not possible to align multiple elements side by side in the same row.</h3><div id="dc1e24ec-e2b7-4dd8-b831-f170656fbceb" class="column-list"><div id="2695c49a-54a4-4a33-8628-3d579ccc52d1" style="width:31.25%" class="column"><figure id="1b5ddaa6-6ec7-4f56-a392-63b98f04366c" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%202.png"><img style="width:859px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%202.png"/></a></figure></div><div id="dcfb483c-c9e8-432d-9229-9232c1b3649d" style="width:68.75%" class="column"><figure id="169bdc75-376d-4f14-b359-e5cc8f68f869" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%203.png"><img style="width:192px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%203.png"/></a></figure></div></div><p id="0d36499c-ac6d-42b3-a6cd-4294c1bc0204" class="">
+</p><h3 id="77715f80-7fe6-4d49-bcf9-cdc444ba1a96" class="block-color-gray_background">Use the Horizontal Arrangement layout element to arrange multiple components horizontally.</h3><p id="04c74c40-4744-4d78-a0be-fc5e47338463" class="">
+</p><div id="efaaa61d-d4c5-420e-aee9-9ebfaf3c17c4" class="column-list"><div id="8b9b69f7-8195-41a5-909d-b11be9e4a912" style="width:62.5%" class="column"><figure id="590656ea-1f15-4948-a30e-403a3408463c" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%204.png"><img style="width:1291px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%204.png"/></a></figure></div><div id="dd9df240-8c5b-42a9-ac11-851feb28074b" style="width:37.50000000000001%" class="column"><figure id="7e8ab4e9-79fc-4b9a-9bce-7c8d1d071f04" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%205.png"><img style="width:144px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%205.png"/></a></figure></div></div><p id="75dbcbeb-49aa-4715-be3d-53b4ea3f2ab1" class=""><strong>Use the Horizontal Arrangement layout element to arrange multiple components horizontally.</strong></p><p id="9ba1b115-ec0c-4a13-bccf-5c501e575ac3" class=""><strong>Instructions:</strong></p><ol type="1" id="d77d3005-5e93-4329-9d1a-286a2e924251" class="numbered-list" start="1"><li>Open App Inventor 2 and create a new project.</li></ol><ol type="1" id="1d84ced9-7864-4f0a-ab04-b09ff9a8b571" class="numbered-list" start="2"><li>Drag a Horizontal Arrangement component from the Palette onto the Designer.</li></ol><ol type="1" id="0f100465-8c4e-4f0b-8de5-76f84bfac8f2" class="numbered-list" start="3"><li>Add one or more components to the Horizontal Arrangement, such as Labels, Buttons, Images, or TextBoxes.</li></ol><ol type="1" id="1ca4af94-d00e-4d0f-9880-8a8606b33ac6" class="numbered-list" start="4"><li>Click the Preview button to see how the components are arranged.</li></ol><ol type="1" id="61f964e2-1e2f-4ad5-a4af-ace7461d42b3" class="numbered-list" start="5"><li>Use the Properties panel to change the appearance of the Horizontal Arrangement, such as its alignment, height, and width.</li></ol><p id="90c41012-4096-4df2-8c41-cfc35d6b21c1" class=""><strong>Details:</strong></p><ul id="2cd94894-0a0a-414e-82c7-b8ae58f4ae94" class="bulleted-list"><li style="list-style-type:disc">The Horizontal Arrangement component is a formatting element that allows you to arrange other components horizontally.</li></ul><ul id="5250ce64-0bcf-4822-b20e-5d70a5914059" class="bulleted-list"><li style="list-style-type:disc">Components in a Horizontal Arrangement are arranged from left to right, with the first component appearing on the left and the last component appearing on the right.</li></ul><ul id="c9248b67-74db-4b33-affd-9789681ac3d3" class="bulleted-list"><li style="list-style-type:disc">The components in a Horizontal Arrangement are vertically centered.</li></ul><ul id="7ad99b81-8c93-4f9a-8b49-23618528c792" class="bulleted-list"><li style="list-style-type:disc">You can change the alignment of the components in a Horizontal Arrangement by setting the Alignment property to Left, Center, or Right.</li></ul><ul id="5ec5bfb9-8226-4c92-8dbd-52cb2d1481f0" class="bulleted-list"><li style="list-style-type:disc">You can also change the height and width of the Horizontal Arrangement by setting the Height and Width properties, respectively.</li></ul><p id="6927e869-befa-4056-acd0-ad99afd9e35e" class="">
+</p><h3 id="0904749b-8c71-4704-bf88-0743fae563d1" class="block-color-gray_background"><strong>Utilize the Vertical Arrangement layout component to arrange multiple elements vertically.</strong></h3><figure id="6aa68dc5-bbfd-424e-8ac2-d10c981c88fc" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%206.png"><img style="width:2098px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%206.png"/></a></figure><p id="dc128bf6-7b9d-4642-8c60-b0d70e40153c" class=""><strong>Utilize the Vertical Arrangement layout component to arrange multiple elements vertically.</strong></p><p id="d1ced373-ac98-449c-b8fb-400dc58bcc9a" class=""><strong>Instructions:</strong></p><ol type="1" id="45a1d468-bae5-4c55-ba13-ad86e6457460" class="numbered-list" start="1"><li>Create a new App Inventor 2 project.</li></ol><ol type="1" id="8418928e-7345-4069-b2ce-b0063e5232be" class="numbered-list" start="2"><li>Add a Vertical Arrangement component to the screen.</li></ol><ol type="1" id="2d460339-5df4-418a-99fc-4f9b5ed7af97" class="numbered-list" start="3"><li>Add multiple elements to the Vertical Arrangement component, such as labels, buttons, images, and text inputs.</li></ol><ol type="1" id="e0dd6b20-9202-44a9-8abb-7070cc173f38" class="numbered-list" start="4"><li>Arrange the elements in the order that you want them to appear on the screen.</li></ol><ol type="1" id="537f1e8c-db9a-4b5e-8a41-163e0b2947c9" class="numbered-list" start="5"><li>Set the properties of the Vertical Arrangement component, such as the alignment and padding.</li></ol><ol type="1" id="f0c9869b-9702-4772-8be8-3d6c17a408e7" class="numbered-list" start="6"><li>Preview the app and make sure that the elements are arranged correctly.</li></ol><p id="44497d09-9818-448c-9402-1d9fab98a100" class=""><strong>Additional Details:</strong></p><ul id="15a01e4b-6ef9-4f7d-a910-ffaadf77fa2b" class="bulleted-list"><li style="list-style-type:disc">The Vertical Arrangement component is a formatting element that arranges its child components vertically, from top to bottom.</li></ul><ul id="87c1b6c3-4965-48e3-ba65-449272a92713" class="bulleted-list"><li style="list-style-type:disc">The width of the Vertical Arrangement component is determined by the widest child component whose width property is not set to Fill Parent.</li></ul><ul id="d4bcf205-9291-4269-b321-b99874cbf5b9" class="bulleted-list"><li style="list-style-type:disc">The height of the Vertical Arrangement component is determined by the total height of its child components.</li></ul><ul id="9f5b6341-a1a2-49d0-9e53-864b8104143a" class="bulleted-list"><li style="list-style-type:disc">You can use the alignment property of the Vertical Arrangement component to specify how the child components are aligned horizontally. The choices are left aligned, horizontally centered, and right aligned.</li></ul><ul id="67c0ab5b-c951-42b7-8c86-af50d5b384c1" class="bulleted-list"><li style="list-style-type:disc">You can use the padding property of the Vertical Arrangement component to add space around the child components.</li></ul><p id="2f97b4a6-b6ab-4020-a67e-00490b27db94" class="">
+</p><h3 id="87af7577-8e69-4acb-8fd6-70b478ed8ff1" class="block-color-gray_background">Adjust the layout using the &#x27;Interface Layout&#x27; and &#x27;Component&#x27; Width/Height properties.</h3><figure id="64a957d2-fc94-40ef-bb6b-eb648fb55f7d" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%207.png"><img style="width:2300px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%207.png"/></a></figure><p id="60103672-8018-4a8a-97bf-cb4bdc9aaefb" class="">
+</p><p id="c3cecc59-1573-4518-b686-578d629a03b8" class=""><strong>Adjust the layout using the &#x27;Interface Layout&#x27; and &#x27;Component&#x27; Width/Height properties</strong></p><p id="bd394cd6-ed5e-43fc-9e7a-a56aeeb1ea35" class="">App Inventor 2 provides two ways to adjust the layout of your app:</p><ul id="29f000c6-e9d6-489f-959d-67c3ece01471" class="bulleted-list"><li style="list-style-type:disc"><strong>Interface Layout:</strong> This is the overall layout of your screen, and it is controlled by the <strong>Screen</strong> and <strong>Arrangement</strong> components.</li></ul><ul id="72d70500-06fe-4f60-aba7-d52fb01a95a8" class="bulleted-list"><li style="list-style-type:disc"><strong>Component Width/Height:</strong> This controls the size of individual components on your screen.</li></ul><p id="de5e8e6b-093e-4c06-9697-ce626f722f11" class="">To adjust the layout using the Interface Layout, you can use the following properties:</p><ul id="21bee3e7-8149-4f25-a103-a22366c4dc12" class="bulleted-list"><li style="list-style-type:disc"><strong>Screen:</strong><ul id="b8b730b9-0256-4b03-9c8f-59f5ce4354f1" class="bulleted-list"><li style="list-style-type:circle"><strong>Orientation:</strong> This determines whether the screen is displayed in landscape or portrait mode.</li></ul><ul id="e6f7d067-3e71-4716-80b7-c6ac98e4460b" class="bulleted-list"><li style="list-style-type:circle"><strong>Title:</strong> This is the text that is displayed in the title bar of the app.</li></ul><ul id="4810e5e4-b7da-41c8-b5e6-8eb51daeca53" class="bulleted-list"><li style="list-style-type:circle"><strong>Background Color:</strong> This is the color of the background of the screen.</li></ul></li></ul><ul id="f6a51c18-1eab-4990-a69e-22f567a55060" class="bulleted-list"><li style="list-style-type:disc"><strong>Arrangement:</strong><ul id="e2c044fe-ba30-4fcf-bbc9-32fa7df10134" class="bulleted-list"><li style="list-style-type:circle"><strong>AlignHorizontal:</strong> This determines how the components in the arrangement are aligned horizontally.</li></ul><ul id="947fc6db-74b4-49fc-a05a-dcea04f16aa5" class="bulleted-list"><li style="list-style-type:circle"><strong>AlignVertical:</strong> This determines how the components in the arrangement are aligned vertically.</li></ul><ul id="b8a1eb91-2683-46a4-83e9-47a458355b29" class="bulleted-list"><li style="list-style-type:circle"><strong>BackgroundColor:</strong> This is the color of the background of the arrangement.</li></ul></li></ul><p id="7cf3fd36-af3f-4225-9046-281c3102ecb9" class="">To adjust the layout using the Component Width/Height properties, you can use the following properties:</p><ul id="c76881d1-605f-4853-b53d-a31e57aa3296" class="bulleted-list"><li style="list-style-type:disc"><strong>Width:</strong> This determines the horizontal width of the component, in pixels.</li></ul><ul id="b4cfa96a-ec0c-401e-81ae-179e338804f3" class="bulleted-list"><li style="list-style-type:disc"><strong>Height:</strong> This determines the vertical height of the component, in pixels.</li></ul><ul id="086a8486-d701-41ee-9d97-677d138ba9d5" class="bulleted-list"><li style="list-style-type:disc"><strong>WidthPercent:</strong> This determines the horizontal width of the component as a percentage of the screen width.</li></ul><ul id="8bc026f8-88fe-4d03-9584-ee0c60f4a5bd" class="bulleted-list"><li style="list-style-type:disc"><strong>HeightPercent:</strong> This determines the vertical height of the component as a percentage of the screen height.</li></ul><p id="2edee2e4-2f12-4b69-98a8-ee529867974e" class="">
+</p><figure id="9f9838d2-f48d-4153-84bf-86433ded7119" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%208.png"><img style="width:2136px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%208.png"/></a></figure><p id="7b196226-ab51-446d-be09-8671710bf592" class="">
+</p><h3 id="e3281499-cf25-427e-8c55-e85013100e74" class="block-color-gray_background">What the online AI2 design tool presents is only the layout of the interface; the actual presentation on the phone must be uploaded for preview.</h3><p id="36e55a25-ad0f-453a-8863-715b6bad5117" class=""><strong>App Inventor 2 Exercise: Designing and Previewing Your App</strong></p><p id="b5a95151-76fb-489e-b903-4c09c9a218a5" class="">One of the benefits of using App Inventor 2 is that you can design and preview your app without having to write any code. This makes it easy to experiment with different ideas and to get a feel for how your app will look and work before you start coding.</p><p id="faa59837-a644-4186-b935-49271298aa0d" class="">To design your app, you will use the App Inventor 2 designer. The designer is a web-based tool that allows you to create the user interface for your app by dragging and dropping components onto a canvas. You can also use the designer to set the properties of each component, such as its size, color, and text.</p><p id="c8519a11-7108-4d3a-b270-aad5cfb892e8" class="">Once you have designed your app, you can preview it on your phone by uploading it to the App Inventor 2 cloud server. To do this, you will need to create an App Inventor 2 account and connect your phone to the cloud server.</p><p id="84c8c1f7-ec0c-46fb-93c7-1255917b7019" class="">Once your app is uploaded, you can open it on your phone by using the App Inventor 2 companion app. The companion app is available for free on the Google Play Store.</p><p id="ce74b68d-22a9-4c57-9b41-eb76ea547cf5" class="">When you preview your app on your phone, you will be able to see how the user interface looks and works. You will also be able to test any functionality that you have implemented.</p><p id="32dd13ca-2da0-422b-adb9-b8ff2cf795df" class="">It is important to note that the App Inventor 2 designer only presents the layout of the interface. The actual presentation on the phone may vary depending on the device&#x27;s screen size and other factors. To get a more accurate preview of your app, it is recommended that you test it on a variety of devices.</p><div id="3461d333-b111-4776-a49c-a20aa43544b9" class="column-list"><div id="3a59ae21-0292-4305-8e37-be82f873810b" style="width:37.5%" class="column"><figure id="33e44e94-e2fc-47fb-86c0-602facc73596" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%209.png"><img style="width:824px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%209.png"/></a></figure></div><div id="cbd224fc-acb5-45c2-ad0b-e3d6b2a01a60" style="width:62.5%" class="column"><figure id="447b7417-7866-4b77-8e05-d966753a6806" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%2010.png"><img style="width:336px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/Untitled%2010.png"/></a></figure></div></div><p id="ba8dd0d2-17c4-4de9-9f99-39d1f8ab52c7" class="">Here are some additional tips for designing and previewing your App Inventor 2 app:</p><ul id="6c46933b-87c3-43d3-9501-2e48cebce366" class="bulleted-list"><li style="list-style-type:disc">Use the App Inventor 2 documentation to learn more about the designer and the different components that you can use.</li></ul><ul id="64be7e2b-3d1e-4694-b12f-c0d50971ff75" class="bulleted-list"><li style="list-style-type:disc">Experiment with different ideas and layouts to see what works best for your app.</li></ul><ul id="989c0cca-686b-47a8-bb3c-86bab8026e14" class="bulleted-list"><li style="list-style-type:disc">Use the preview feature to test your app on different devices.</li></ul><ul id="8f61b9bf-bc9e-44b5-9514-48f41957b617" class="bulleted-list"><li style="list-style-type:disc">Get feedback from others on how your app looks and works.</li></ul><p id="fc1645db-8eaf-4270-b03c-25a47db93f18" class="">Once you are satisfied with the design of your app, you can start coding to implement the functionality.</p><p id="b69d0ecf-b62d-4ab4-b229-8553bf44d523" class="">
+</p><p id="1be2979a-c280-47e1-82bb-af6e10479384" class="">
+</p><figure id="8065a377-c240-4387-a829-9a98b5a398f0" class="image"><a href="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/19.png"><img style="width:1500px" src="App%20Inventor%202%20Basic%20Operations%202%20-%20AI2%20Palette%20&amp;%20%203a840d0a897846ad87b3fe37d333674d/19.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
