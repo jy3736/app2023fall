@@ -1,0 +1,710 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>App Inventor 2 微型專題 - 物聯網 K-Type 工業溫度表</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="0197fd65-d168-4d70-b776-43a9636f3f6e" class="page sans"><header><img class="page-cover-image" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/phone2.png" style="object-position:center 92.29%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/yang-tr-wb.png"/></div><h1 class="page-title">App Inventor 2 微型專題 - 物聯網 K-Type 工業溫度表</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="d68a95dc-f534-4b57-af91-e7ee97ab22f0" class="block-color-purple_background">翻轉教室輔助影片 </h2><div id="3adcbacc-fca6-420b-b04b-1a2117c1065c" class="column-list"><div id="b9f39dc4-858b-49f9-b8ce-765520b249bc" style="width:25%" class="column"><figure id="119a3f61-06b5-4887-b658-0993452159f8" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled.png"><img style="width:296px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled.png"/></a></figure></div><div id="a6b2864c-e653-42cf-bfbf-464f1fc67f9c" style="width:75%" class="column"><figure id="c29908ef-814a-43e5-b6a9-2bc7686e0811"><a  target="_blank" href="https://youtu.be/voYKzB9DKVk" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">App Inventor 2 期中微型專題 - 物聯網 K-Type 工業溫度表</div><div class="bookmark-description">APP 程式設計實務 (2021 Fall)</div></div><div class="bookmark-href"><img src="https://www.youtube.com/s/desktop/18069be1/img/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/voYKzB9DKVk</div></div><img src="https://i.ytimg.com/vi/voYKzB9DKVk/hqdefault.jpg" class="bookmark-image"/></a></figure></div></div><h2 id="4c5162a5-f855-4b37-8678-52d5fd1f7c9d" class="block-color-purple_background">課程設計 </h2><h2 id="1c7979f6-aff1-449a-ae20-62b51414ac61" class="block-color-brown">基於物聯網(IoT)的雙通道工業用 K-Type 溫度表 App </h2><div id="e49a3b7b-4a1d-4dc0-a595-d22ab68fed14" class="column-list"><div id="6047d01b-21eb-4100-91b9-3cff10255cea" style="width:50%" class="column"><h3 id="b6d94167-bae2-4857-becc-ea0131178def" class="block-color-yellow">為簡化本專題的硬體設計，我們提供兩個『模擬』遠端K-Type 溫度感測器的選項：1. AI2 Blockly 模擬程式、2. Python 模擬程式。</h3><figure id="a215308c-d177-4331-8b87-97aa6d76e272" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/yang02.png"><img style="width:192px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/yang02.png"/></a></figure><figure id="2c13ec7b-1ecb-4aa5-b020-c825bf07b2bf" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/IMG_20211025_082351.jpg"><img style="width:4032px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/IMG_20211025_082351.jpg"/></a></figure></div><div id="ab839621-286a-4238-a64b-3d839054606f" style="width:50%" class="column"><figure id="a55e1394-9be7-450c-954b-97bc51d342dd" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%201.png"><img style="width:240px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%201.png"/></a></figure></div></div><h3 id="27e60f55-401e-40df-bdc3-a366ee4726f6" class="block-color-yellow">本專題必須使用 <code>Firebase Realtime Database</code> 做為存/取 IoT 溫度資料的媒介。</h3><figure id="d18e23af-0ed0-4a2d-9668-42ea8838cc99"><a  target="_blank" href="https://firebase.google.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Firebase</div><div class="bookmark-description">Join us for Firebase Summit on November 10, 2021. Tune in to learn how Firebase can help you accelerate app development, release with confidence, and scale with ease. Register Backed by Google and loved by app development teams - from startups to global enterprises All products expand_more expand_less Join us for Firebase Summit on November 10, 2021.</div></div><div class="bookmark-href"><img src="https://www.gstatic.com/devrel-devsite/prod/v7d29b723aef4d149fe98fb5331f45df163ead31f4cb33149234e59d978e54b1e/firebase/images/favicon.png" class="icon bookmark-icon"/>https://firebase.google.com/</div></div><img src="https://firebase.google.com/images/social.png" class="bookmark-image"/></a></figure><h2 id="718f3f8f-7b6a-47be-9c87-bfcc4d80c13c" class="block-color-purple_background">工業用 K-Type 溫度表 App 基本功能說明</h2><div id="8e94c0b3-72b6-437d-a818-ecf6884032af" class="column-list"><div id="0ff13454-ce6b-4f40-b347-8686ed955206" style="width:33.33333333333333%" class="column"><h3 id="1b8d522e-0f64-4bbd-a088-fa6689631ad1" class="block-color-orange">AI2 Designer Layout</h3><figure id="0f0b5658-9510-4dc7-a079-828999bfcde2" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%202.png"><img style="width:838px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%202.png"/></a></figure></div><div id="1adb6787-60a7-4c96-b903-b5e33fef8290" style="width:33.33333333333333%" class="column"><h3 id="a357857f-210f-4430-ae44-d7d34cf59e9d" class="block-color-orange">選擇 T1 溫度計</h3><figure id="4d682c87-fe6a-428d-8bdf-1f9950676b8e" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%203.png"><img style="width:1076px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%203.png"/></a></figure></div><div id="fd814447-2d62-48d4-9544-56d7a8b2877d" style="width:33.33333333333333%" class="column"><h3 id="671eb0b6-5bbe-4e72-b1c8-7c1cc62a63cb" class="block-color-orange">選擇 T2 溫度計</h3><figure id="77976b74-f42b-4c7d-b0a3-44907adb2a9f" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%204.png"><img style="width:1076px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%204.png"/></a></figure></div></div><div id="57c6166c-f225-4d8a-a3e0-454afdfba65c" class="column-list"><div id="21e949ce-0140-483c-b903-fcfa00a00743" style="width:33.333333333333336%" class="column"><h3 id="99af78ab-fefc-42d9-a820-e28d8e239d56" class="block-color-orange">選擇 T1 - T2 溫度差</h3><figure id="24491a2a-cd75-484e-9eba-81bda558655b" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%205.png"><img style="width:518px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%205.png"/></a></figure></div><div id="034d7ea1-6484-47aa-8826-83f5e5ea4210" style="width:33.333333333333336%" class="column"><h3 id="bb6c2417-bd13-43c6-a5cc-661ef8dfa1ff" class="block-color-orange">選用攝氏 °C</h3><figure id="9ce4e262-e578-419c-90e4-ff7c63f60777" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%206.png"><img style="width:518px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%206.png"/></a></figure></div><div id="2bf50077-b74c-4496-bdd3-f537f9e6fbfc" style="width:33.33333333333333%" class="column"><h3 id="c871a4ac-9a5f-4b8b-a904-c3d6b5ed8471" class="block-color-orange">選用華氏 °F</h3><figure id="e77fd1ef-cf4f-4fa6-a020-46dc6032472d" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%207.png"><img style="width:518px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%207.png"/></a></figure></div></div><div id="1d4e0165-2433-4014-af83-9c9dd7e293ab" class="column-list"><div id="99dfb6a5-8c8a-4600-9619-d411cf3bb09f" style="width:33.333333333333336%" class="column"><h3 id="a4cb5d11-53b8-4584-91c9-d497f97d3e4f" class="block-color-orange">暫停溫度取樣</h3><figure id="7e583e1e-5f4c-4e57-ba6a-8564cff6f036" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%208.png"><img style="width:518px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%208.png"/></a></figure></div><div id="8d1353e8-a33e-4540-8271-b9ff74a2b7bd" style="width:33.333333333333336%" class="column"><h3 id="bfe259e5-8376-4c9c-a0c1-fe57fc1989cd" class="block-color-orange">動態更新最低溫度</h3><figure id="8e8e0abe-c194-4830-b54e-8c65b5b332ac" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%209.png"><img style="width:518px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%209.png"/></a></figure></div><div id="d783d691-b360-4d30-b258-b6c6d96df35e" style="width:33.33333333333333%" class="column"><h3 id="58c54607-1c41-4709-83d4-b2663d2962be" class="block-color-orange">動態更新最高溫度</h3><figure id="55df76d5-5047-46b7-bd2f-ffd30f85bd62" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2010.png"><img style="width:518px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2010.png"/></a></figure></div></div><p id="834338c2-c890-4ee2-899a-d4e8a43682d0" class="">
+</p><h2 id="2fd3d2cf-b973-45f5-9b0c-6f34e7915064" class="block-color-purple_background">AI2 APP -『模擬』物聯網(IoT)工業溫度感測器 </h2><div id="4f66b904-a444-4409-8227-de4feaf13e51" class="column-list"><div id="622f2278-1ab0-4843-879a-8b64f801c0c9" style="width:33.333333333333336%" class="column"><figure id="7a8217f7-b4b3-4a2e-b927-333378a9403b" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2011.png"><img style="width:1081px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2011.png"/></a></figure></div><div id="b4e11425-01e7-41bd-8bd1-f3e86dd13e77" style="width:33.333333333333336%" class="column"><figure id="acb55579-b010-4660-80de-fb5fb58a4af0" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2012.png"><img style="width:1081px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2012.png"/></a></figure></div><div id="a8f66b50-b4a2-46cb-ac23-ee5f474798dd" style="width:33.33333333333333%" class="column"><figure id="b886e6ba-b8a0-4ca8-bdfd-2669834e86d0" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2013.png"><img style="width:386px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2013.png"/></a></figure><figure id="baa97cbc-902a-4130-aa64-64fc2ed8e8a2" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2014.png"><img style="width:439px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2014.png"/></a></figure></div></div><figure id="e7e30495-cf86-4a13-941a-49ad683c20f8" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2015.png"><img style="width:1786px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2015.png"/></a></figure><figure id="981edaab-79b3-46a7-9f09-13f1cdb7b9ad" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2016.png"><img style="width:1622px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/Untitled%2016.png"/></a></figure><p id="4b6fa422-ff19-4092-8e04-d2f518ac137b" class="">
+</p><h2 id="7f65078c-3bc1-4ae0-a38b-de22084a2876" class="block-color-purple_background">Python 程式 -『模擬』物聯網(IoT)工業溫度感測器 </h2><h3 id="11c3f062-3860-445e-8538-12ca085bab0c" class="block-color-yellow">只要安裝所需的套件，這個程式可以在PC環境或Raspberry Pi上執行。</h3><p id="ef46e5ff-8178-4834-ac7a-85c31482b6a6" class=""><a  target="_blank" href="https://stackoverflow.com/questions/32998502/python-importerror-no-module-named-crypto-publickey-rsa">Python ImportError No module named crypto.PublicKey.RSA - Stack Overflow</a></p><pre id="92cf1c65-fa2c-4990-ac03-ab5e9a77f197" class="code code-wrap"><code>from firebase import firebase
+from random import randrange, random
+from time import sleep
+import sys
+
+db_url = &#x27;https://你的資料庫網址.firebaseio.com/&#x27;
+fdb = firebase.FirebaseApplication(db_url, None)
+
+T1, T2 = 25, 25
+
+def sample():
+    global T1, T2
+    T1 = int((T1+random()*randrange(-1,2))*10)/10    
+    T2 = int((T2+random()*randrange(-1,2))*10)/10    
+    print(f&quot;T1 = {T1:4}  T2 = {T2:4}&quot;)   
+
+def main(sr=1, cd=120):
+    global T1, T2
+    cntdown = cd
+    while(cntdown&gt;0):
+        cntdown-=1
+        sample()
+        fdb.put(&#x27;/Meter&#x27;, &#x27;T1&#x27;, T1)
+        fdb.put(&#x27;/Meter&#x27;, &#x27;T2&#x27;, T2)
+        sleep(sr)
+
+if __name__==&quot;__main__&quot;:
+    main()</code></pre><p id="51c50166-04d1-4c58-8ad6-a543bb6ae5a3" class="">
+</p><h3 id="981cf015-c5ad-4a5f-9164-e49ac4cc015a" class="block-color-gray_background">更詳細的操作說明，請參閱『翻轉教室輔助影片』...</h3><figure id="d0736f2e-da9c-497f-a925-c76a85f05dd3" class="image"><a href="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/bike1.png"><img style="width:1920px" src="App%20Inventor%202%20%E5%BE%AE%E5%9E%8B%E5%B0%88%E9%A1%8C%20-%20%E7%89%A9%E8%81%AF%E7%B6%B2%20K-Type%20%E5%B7%A5%E6%A5%AD%E6%BA%AB%E5%BA%A6%E8%A1%A8%200197fd65d1684d70b77643a9636f3f6e/bike1.png"/></a></figure><p id="67e2b08f-ef4d-433e-9c01-8fbfece56806" class="">
+</p><p id="3326e5de-9ccf-484c-9e40-9cc1cf6d5521" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
+<script>hljs.highlightAll();</script>
+</body></html>
