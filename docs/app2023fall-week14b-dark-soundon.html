@@ -1,0 +1,794 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Node-RED Function Nodes in Depth</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="57e39224-36ec-45a3-bdd8-2f045561c32b" class="page sans"><header><img class="page-cover-image" src="Node-RED%20Function%20Nodes%20in%20Depth%2057e3922436ec45a3bdd82f045561c32b/phone2.png" style="object-position:center 92.29%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Node-RED%20Function%20Nodes%20in%20Depth%2057e3922436ec45a3bdd82f045561c32b/yang-tr-wb.png"/></div><h1 class="page-title">Node-RED Function Nodes in Depth</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h3 id="e68fb93b-061f-41f8-b983-d761c65a12da" class="block-color-gray_background">Function node anatomy - inputs via msg object</h3><p id="d6cb8095-e4d6-4942-85b9-aed97d8ab3e6" class="">Function nodes in Node-RED provide a way to execute custom JavaScript code as part of a flow. They receive inputs and can return outputs by working with a global <code>msg</code> object:</p><pre id="27d911ef-bff9-4b2b-bb1b-b69bb74bb4ff" class="code code-wrap"><code>// Access full input message
+const message = global.get(&quot;msg&quot;);
+
+// Get payload contents
+const payload = msg.payload;
+
+// Return modified payload
+msg.payload = processedData;
+return msg;</code></pre><p id="fe039893-daaa-41f5-a8e5-f22cae7cbee5" class="">The <code>msg</code> contains:</p><ul id="ed83a4a7-cae2-442a-830b-79129265bc60" class="bulleted-list"><li style="list-style-type:disc"><code>msg.payload</code> - Main data being processed</li></ul><ul id="bebf859b-dc69-4050-8f0b-b226745ea6ff" class="bulleted-list"><li style="list-style-type:disc"><code>msg.topic</code> - Routing info for messages</li></ul><ul id="00c379aa-4fe7-4deb-b35b-b5dc629f60a3" class="bulleted-list"><li style="list-style-type:disc"><code>msg.parts</code> - Object with message segments</li></ul><ul id="f768c82a-1cff-424c-b5ee-a4770861feba" class="bulleted-list"><li style="list-style-type:disc"><code>_msgid</code> - Unique message ID</li></ul><p id="b1b9a35e-5f23-4138-92be-54627aadc22a" class="">Function nodes export <code>node</code> and <code>context</code> globals allowing access to Node-RED environment, flow variables, and node-specific configs.</p><h3 id="b2825bf9-bf44-4430-99cc-ec45d4b3e157" class="block-color-gray_background">Accessing payload data</h3><p id="43a5de44-b06d-4fc7-9db9-5f095ddcbf72" class="">The <code>msg.payload</code> contains the main data being processed by the function node. Access and manipulate as needed:</p><pre id="59f97a33-c714-43b9-9030-2a3e5403a69a" class="code code-wrap"><code>// Assuming JSON payload
+const data = msg.payload;
+
+// Access properties
+const name = data.name;
+
+// Modify
+if (!data.id) {
+  data.id = generateId();
+}
+
+// Return updated payload
+return msg;</code></pre><p id="cfac35ae-0c2a-4bf7-9533-962c40e6185e" class="">Payloads can hold any JSON-serializable data - strings, numbers, booleans, objects, arrays, etc. Use data types appropriately.</p><p id="10170acd-1c8e-469c-946c-6195a745d247" class="">Check types before accessing since payloads may come from varied external sources:</p><pre id="a3da9369-8e52-4d91-ad20-3d9d66087ef2" class="code code-wrap"><code>if (typeof msg.payload === &quot;object&quot;) {
+  // Process object payload
+} else if(Array.isArray(msg.payload)) {
+  // Handle array payload
+}</code></pre><h3 id="adb462da-758b-4859-82a5-bcfb2d8ae115" class="block-color-gray_background">Modifying, enhancing, reformatting payload</h3><p id="f36b6135-bdbf-4134-8631-ea16d564f1a1" class="">Typical uses for function nodes include:</p><ul id="c2b1c2e3-a031-48a8-be05-04ccff242edb" class="bulleted-list"><li style="list-style-type:disc">Serialize/parse data formats</li></ul><ul id="c931f226-638e-45d7-8260-d4f2ff022efd" class="bulleted-list"><li style="list-style-type:disc">Extract or reformat properties</li></ul><ul id="ac33c2fb-04b4-4c3d-b4fc-759fdfbb87d5" class="bulleted-list"><li style="list-style-type:disc">Perform calculations</li></ul><ul id="696bcff2-3c56-4976-a088-4ae8b47331bf" class="bulleted-list"><li style="list-style-type:disc">Enhance with external data lookups</li></ul><ul id="8ad5d5f2-c51e-4a1f-a155-e5dcb36d3eaf" class="bulleted-list"><li style="list-style-type:disc">Validate against schemas</li></ul><ul id="25864567-581a-4f34-b7e2-166df31d3696" class="bulleted-list"><li style="list-style-type:disc">Build custom responses</li></ul><p id="b419eaa7-9060-4e80-a4da-b88a848f69ee" class="">For example:</p><pre id="733016d7-3116-4f1e-bc6c-5567ca781612" class="code code-wrap"><code>// Reformat release date to YYYY-MM-DD
+const release = new Date(msg.payload.releaseDate);
+msg.payload.releaseDate = release.getFullYear() + &quot;-&quot; +
+   release.getMonth() + &quot;-&quot; + release.getDay();
+
+// Enhance payload with movie metadata lookup
+const id = msg.payload.movieId;
+const metadata = await movieDB.lookup(id);
+
+msg.payload = {...msg.payload, ...metadata};
+
+return msg;</code></pre><p id="93a401aa-f206-43cb-9e20-7f1a22c35d92" class="">Modifying payloads allows shaping data to meet application needs.</p><h3 id="1734ad99-cf41-462d-81d6-19a5829baa91" class="block-color-gray_background">Returning output, async code</h3><p id="6a81c169-e84b-4726-9609-4fa5af6e6e6e" class="">To return output back for further message passing, explicitly return the <code>msg</code> object:</p><pre id="98067d75-6cee-4195-826f-6c2ac818834c" class="code code-wrap"><code>msg.payload = processedData;
+return msg;</code></pre><p id="20f18177-a314-4bef-9c68-c41fdd1a109e" class="">Omitting return will stop further message propagation.</p><p id="3629ac12-e036-456b-8e9a-84adf7684d2f" class="">For async logic, return a Promise. Node-RED will wait for resolution:</p><pre id="96d0ffc0-9218-46f6-89ca-b0ad2cbd33c1" class="code code-wrap"><code>async function transform() {
+
+  const data = doComplexOperation(msg.payload);
+
+  msg.payload = await someAsyncProcess(data);
+
+  return msg;
+}
+
+return transform();
+</code></pre><p id="55bf5dc1-090b-47f6-8731-5a5d975e6aff" class="">Using async/await syntax keeps code clearly structured without callback nesting.</p><p id="523ba3db-956e-4420-902d-8f6c6c7acb45" class="">Make sure to handle any errors appropriately so they propagate back to Node-RED error handling.</p><h3 id="d7430235-7861-46da-9220-7be5f84ec42e" class="block-color-gray_background">Logging, debugging </h3><p id="db5cad5f-409e-4e30-8190-698785d1da88" class="">Logging within functions aids debugging:</p><pre id="2b601876-0b6a-4987-abf9-b6ce9cf0023f" class="code code-wrap"><code>node.log(&quot;Received payload&quot;);
+node.warn(&quot;Missing property, fallback used&quot;);
+
+console.log(msg.payload);
+console.error(&quot;Unhandled error&quot;, err);</code></pre><ul id="7f386b39-8964-42b0-8983-994a226b4c59" class="bulleted-list"><li style="list-style-type:disc"><code>node</code> logging ends up in Node-RED runtime logs</li></ul><ul id="fe178776-3745-4257-be4a-2e183bada272" class="bulleted-list"><li style="list-style-type:disc"><code>console</code> appears in server Javascript console</li></ul><p id="2e0d0211-e1a8-4ab9-89b2-595650f29260" class="">Can return debug data via separate property:</p><pre id="25887d5a-ab97-4edf-8dc5-76fe3f41c45d" class="code code-wrap"><code>msg.payload = result;
+msg.debug = {received: input, generated: output};
+
+return msg;
+</code></pre><p id="3f7aad9e-3812-43b9-852d-0ab95157b82d" class="">Debug nodes can also capture message flow data.</p><p id="45ea9a01-fb75-4888-9e04-1d2461d0ebe9" class="">Set <code>msg.enabled = false</code> to redirect signalling without side effects while testing.</p><p id="2c185235-6f9c-49cd-ae73-fd815671b0bc" class="">Inspectable intermediate outputs accelerate building effective functions.</p><h3 id="c0338007-9197-4cb5-bb14-a37b7eada07f" class="block-color-gray_background">Best practices</h3><p id="f9360a7d-6a8e-4e76-b168-c301c1450763" class="">Follow these function node coding best practices:</p><ul id="3a580f96-6eed-43ad-b3cc-82c476bd44cf" class="bulleted-list"><li style="list-style-type:disc">Use named functions rather than passing anonymous ones<ul id="f4bde568-91b5-4ca8-a47d-776336a388fc" class="bulleted-list"><li style="list-style-type:circle">Improves stack traces for debugging</li></ul><ul id="85a816db-5924-4d31-95a8-11fd83340841" class="bulleted-list"><li style="list-style-type:circle">Allow self-documenting function names</li></ul></li></ul><ul id="be42a111-dfb3-484a-acdf-accf5423fd9b" class="bulleted-list"><li style="list-style-type:disc">Validate input data types</li></ul><ul id="92d46488-baf0-4889-be99-35c61f6ba759" class="bulleted-list"><li style="list-style-type:disc">Handle errors appropriately<ul id="fe67d39f-831a-4739-bce4-8dee2de97cee" class="bulleted-list"><li style="list-style-type:circle">Catch developer mistakes</li></ul><ul id="0ba6eb77-94ed-4ee9-b30b-554c42de7348" class="bulleted-list"><li style="list-style-type:circle">Guard against invalid input</li></ul><ul id="f82d0c3e-ba9c-48bd-ab6a-4976e193894a" class="bulleted-list"><li style="list-style-type:circle">Stop invalid messages propagating</li></ul></li></ul><ul id="24fec994-0c6f-4e76-a2c5-f903f90a3d72" class="bulleted-list"><li style="list-style-type:disc">Idempotent functions<ul id="cac810b4-a43a-4098-a55b-d5d9b4d69068" class="bulleted-list"><li style="list-style-type:circle">Produce same output for a given input</li></ul><ul id="f8b729de-9d43-4511-b418-5433bccb2026" class="bulleted-list"><li style="list-style-type:circle">Minimizes side effects</li></ul></li></ul><ul id="67a34b96-b550-40fb-a4aa-8f82668af130" class="bulleted-list"><li style="list-style-type:disc">Single responsibility<ul id="295259ef-2abf-49d5-8da4-d8721df047f6" class="bulleted-list"><li style="list-style-type:circle">Each function does one specific task</li></ul></li></ul><ul id="d42e0944-7295-4cca-9ae7-9ac581b0353c" class="bulleted-list"><li style="list-style-type:disc">Favor pure functions<ul id="1fb0973c-19e1-4c4c-899e-3084456586b7" class="bulleted-list"><li style="list-style-type:circle">Avoid external dependencies</li></ul><ul id="2f196951-8da8-4d4f-9b7c-392794553982" class="bulleted-list"><li style="list-style-type:circle">Deterministic outputs based on inputs</li></ul></li></ul><ul id="eb11aa8e-31f3-4b17-bbe7-41e68948c5e9" class="bulleted-list"><li style="list-style-type:disc">Asynchronous over synchronous<ul id="ec2225b7-9eda-4e17-8fc9-071ace60f307" class="bulleted-list"><li style="list-style-type:circle">Use async/promises rather than callbacks</li></ul><ul id="0c68dd2c-3729-4ee2-bf10-22ea553913cc" class="bulleted-list"><li style="list-style-type:circle">Avoid blocking thread</li></ul></li></ul><p id="df6efd96-9eab-4c29-a0f5-21bdf1d2a212" class="">Adhering to best practices takes discipline but results in superior robustness.</p><h3 id="008e3307-8970-4dcd-a260-e31c2bcd1386" class="block-color-gray_background">Context &amp; globals</h3><p id="2d662eed-0760-4549-b354-03a8c60b5adc" class="">Function nodes provide access to global context and flow variables via <code>context</code>:</p><pre id="df6f41a0-3cec-4d13-b391-75ca9d0c8f40" class="code code-wrap"><code>// Get global variable
+const apiKey = context.get(&quot;apiKey&quot;);
+
+// Check authenticated user
+if(context.get(&quot;user&quot;)) {
+  // Custom user-specific processing
+}</code></pre><p id="b094876d-b50e-4e96-919b-932b2ecf16eb" class="">Define commonly used values in context globals available to all functions.</p><p id="50beb24d-fe33-4ebf-b8ae-f2efee539620" class="">Can also set dynamic vars:</p><pre id="5be2ae1c-7440-40fe-bd33-6141afe74263" class="code code-wrap"><code>// Set value for just this function
+context.set(&quot;requestId&quot;, 101);
+</code></pre><p id="7e47cc1f-156c-4cf8-8648-46bc27803f8c" class="">Flow context allows loosely coupled interchange without direct dependency coupling between functions.</p><h3 id="aaf32f31-d2bd-4b9c-9b86-ddf13665be5a" class="block-color-gray_background">External modules</h3><p id="9408b147-e4cc-4e3c-a347-de9e2cc491aa" class="">Leverage NPM packages within functions via <code>npm install</code>:</p><pre id="c5e7a96a-b311-4b20-8b48-f8d417e021bf" class="code code-wrap"><code>// Use installed npm module
+const fetch = require(&#x27;node-fetch&#x27;);
+
+async function callApi(url) {
+
+  const response = await fetch(url);
+  return response.json();
+
+}
+
+const catsData = await callApi(&#x27;&lt;https://cats.com/api&gt;&#x27;);
+msg.payload = catsData;
+
+return msg;</code></pre><p id="dfeb4d20-6672-4dfb-80ba-0a394fe30021" class="">Nearly any Javascript library can integrate this way.</p><p id="75d5d04c-8d33-4d33-8e5b-63b7a2e2c50c" class="">For intensive processing, best to abstract logic into separate modules loaded by functions:</p><pre id="ac759533-1b3a-4c7d-964a-b7ef211bd48b" class="code code-wrap"><code>// Function node
+const imageUtils = require(&#x27;./image-utils&#x27;);
+msg.payload = await imageUtils.process(msg.payload);
+return msg;
+
+
+// image-utils.js module (not exported)
+const sharp = require(&#x27;sharp&#x27;);
+
+async function process(buffer) {
+  return sharp(buffer).grayscale().toBuffer();
+}</code></pre><p id="1ce19310-58b6-4219-8a4b-bfa0ff1a2d49" class="">This keeps individual function nodes clean.</p><h3 id="c6c580c1-526f-44bb-bf14-f97fdf11f979" class="block-color-gray_background">Complex function examples</h3><p id="f5fefcf8-82fa-4b1f-8b2c-7f2dda383e16" class="">Complex logic may include:</p><ul id="cb81bbca-ff26-4e86-a60d-de0fc621dcc5" class="bulleted-list"><li style="list-style-type:disc">Multi-step orchestration code</li></ul><ul id="4b2442f9-186a-412f-a2be-3ce7f910663a" class="bulleted-list"><li style="list-style-type:disc">Execution of business processes</li></ul><ul id="a339d09a-8f9e-461d-89ef-80e37a172fda" class="bulleted-list"><li style="list-style-type:disc">Integration with external services</li></ul><ul id="52c6db07-2f6e-45c4-ae60-228b72e77d94" class="bulleted-list"><li style="list-style-type:disc">Data validation/transformations</li></ul><ul id="f918c6f6-e4fa-4719-b9f2-ed70d66bc416" class="bulleted-list"><li style="list-style-type:disc">Formatting responses</li></ul><ul id="ffb075f0-3aeb-41d5-8c53-e61affc4337e" class="bulleted-list"><li style="list-style-type:disc">Complex calculated output</li></ul><ul id="f469f82f-f9cc-42c5-8966-394be24d5a9f" class="bulleted-list"><li style="list-style-type:disc">Specialized file/stream handling</li></ul><p id="5c646c72-aa88-4621-b7b0-783e322fee30" class="">For example:</p><pre id="f482182f-a6c6-412c-88bf-3926db735b82" class="code code-wrap"><code>const { Kafka } = require(&#x27;kafkajs&#x27;);
+
+// Kafka validation schema
+const schema = require(&#x27;./schema&#x27;);
+
+async function processKafka() {
+
+  // Initialize Kafka client
+  const kafka = new Kafka({});
+
+  // Consume message
+  const message = await consumer.consume();
+
+  // Validate
+  const { error } = schema.validate(message);
+  if (error) {
+    throw Error(&quot;Invalid message&quot;);
+  }
+
+  // Handle message
+  const result = await processMessage(message);
+
+  // Publish output
+  await producer.send({result});
+
+  return msg;
+}
+
+msg.payload = await processKafka();
+return msg;</code></pre><p id="39977e84-788d-4e8d-84bb-45663d7c8fa4" class="">Better to break sections into dedicated functions and modules.</p><p id="0114014c-a7ed-4c8f-93de-fc046bac5374" class="">Test business logic thoroughly before wiring into a live flow.</p><h3 id="9c8c9289-c0b7-4047-8181-501823d98d37" class="block-color-gray_background">Attendee practice exercises</h3><p id="56dc7603-3e8f-4f86-9646-0cdf5634a5f7" class="">Reinforce concepts covered through hands-on practice activities and exercises:</p><p id="a6f7f91c-286d-4730-91c3-fc7454c6260f" class=""><strong>Basic Function</strong></p><ul id="bbc7b5aa-39fb-4cee-a389-67f8bc1d5bb2" class="bulleted-list"><li style="list-style-type:disc">Create flow with inject node -&gt; function -&gt; debug</li></ul><ul id="d41b516b-5a78-40ac-af89-770f02a9df75" class="bulleted-list"><li style="list-style-type:disc">Log out msg properties in function</li></ul><ul id="54655bb4-5ab5-4280-84db-2844cb423a65" class="bulleted-list"><li style="list-style-type:disc">Return fixed output message</li></ul><p id="63613c2c-27ad-4a2f-bfee-2a45f114d593" class="">Observe function execution through debug pane.</p><p id="88509877-0f13-46de-8beb-f28880262cd7" class=""><strong>Filter Messages</strong></p><ul id="37a5df0f-f60f-429f-89dd-7f3654a84ef0" class="bulleted-list"><li style="list-style-type:disc">Building on above, pass different types of dummy input messages</li></ul><ul id="ab31f3f4-fc44-4bb6-833d-643b33b1fff7" class="bulleted-list"><li style="list-style-type:disc">Within function, test payload type (string, object etc)</li></ul><ul id="d9de3838-8951-4c39-b5a7-82488026dfbd" class="bulleted-list"><li style="list-style-type:disc">Only return messages where payload is a valid object</li></ul><p id="3e6d6847-c906-4fd9-8f94-b07f5ef35680" class="">Notice filtered messages don&#x27;t proceed.</p><p id="5593e3ed-e11e-4f65-b3f7-3a4494ac2f89" class=""><strong>Async Operation</strong></p><ul id="445164f4-bd33-4a03-ad13-da72359bd6a9" class="bulleted-list"><li style="list-style-type:disc">Use async/await to retrieve dummy data</li></ul><ul id="5a940ac4-80c1-40c4-97a2-0c00362958ab" class="bulleted-list"><li style="list-style-type:disc">Resolve with some fixed output to simulate response</li></ul><ul id="9f628843-827d-4675-857a-04f58bf90595" class="bulleted-list"><li style="list-style-type:disc">Note debug node waits for promise resolution</li></ul><p id="98624374-a8f2-43d4-acaf-4e10538cf62c" class=""><strong>Calculate Shipping</strong></p><ul id="15779cc2-93bc-4d1f-90b4-5d45abe92082" class="bulleted-list"><li style="list-style-type:disc">Inject sample order payload with products, quantities and weights</li></ul><ul id="569db27a-b2ff-485a-83b8-52fcd230a546" class="bulleted-list"><li style="list-style-type:disc">Calculate simulated shipping cost based on weight brackets</li></ul><ul id="9b2fd3c9-6c2b-4f3d-9a2a-737b94e8b8af" class="bulleted-list"><li style="list-style-type:disc">Return updated order with total shipping cost added</li></ul><p id="c02dfffe-159c-4179-b277-779e0f32a344" class="">These simple but realistic exercises solidify a working familiarity applying core concepts.</p><p id="c0704090-3097-4f05-9b95-79e88ed45957" class="">Allow sufficient time for attendees to experiment based on provided direction before reviewing as a group.</p><p id="2b116195-33bc-41df-ab85-ae5b02f16483" class="">
+</p><figure id="53cc2f90-a041-41c6-9f75-71ef26881ec9" class="image"><a href="Node-RED%20Function%20Nodes%20in%20Depth%2057e3922436ec45a3bdd82f045561c32b/17.png"><img style="width:1500px" src="Node-RED%20Function%20Nodes%20in%20Depth%2057e3922436ec45a3bdd82f045561c32b/17.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
+<script>hljs.highlightAll();</script>
+</body></html>
