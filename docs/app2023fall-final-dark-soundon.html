@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Final Project - IoT-Enabled Traffic Light System Emulator and Remote Controller</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="a135efe0-0e22-4415-baf5-4d7661f316f9" class="page sans"><header><img class="page-cover-image" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/phone2.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/yang-tr-wb.png"/></div><h1 class="page-title">Final Project - IoT-Enabled Traffic Light System Emulator and Remote Controller</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><p id="7984d34b-0233-4505-8a57-a4f9156605b4" class="">
+</p><h3 id="055b5f4d-a6c1-4172-88f2-13887bd273cd" class="block-color-gray_background">App Development Practice Final Project</h3><p id="bb80287e-63d0-43fa-998f-9769700d6201" class="">You will be tasked with developing both the IoT-Enabled Traffic Light System emulator and controller. Both will be implemented using App Inventor 2. The emulator is designed to replicate a real traffic light system that can be controlled remotely. It consists of only two sets of traffic lights (Red/Yellow/Green) and a text field for inputting an ID. The remote controller includes all the components of the emulator and features eight buttons to transmit specific commands. For further details, please consult the attached animation figures.</p><figure id="9e636ca9-b67a-487f-a29b-fc5e7a591da1" class="image"><a href="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t8.gif"><img style="width:3010px" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t8.gif"/></a></figure><p id="aa910bf1-2fed-486b-8fdc-38fb2c34a817" class="">
+</p><h3 id="77cdc55a-1bd7-4e19-bd48-36cd18e8d39c" class="block-color-gray_background">Remote Controller for IoT-Enabled Traffic Light System</h3><div id="7fcca9d1-98ac-4c3c-bca4-11e9af91e6be" class="column-list"><div id="76a063d0-8695-43ca-88ec-530238832301" style="width:62.5%" class="column"><p id="87b4a6a9-d6fa-4597-9972-2b7bb0c9c84f" class=""><strong>You will be asked to develop a remote controller using either App Inventor 2 or Node-RED for an IoT-enabled Raspberry Pi Pico W traffic light system.</strong></p><p id="53661ce3-50e8-4522-8d4a-17da1bb8519e" class=""><strong>Your UI should incorporate the following components:</strong></p><ul id="ef0c28fa-d95e-462e-aa0b-e5f538eec040" class="bulleted-list"><li style="list-style-type:disc"><strong>MQTT Magic Prefix Text Field:</strong> Enter the magic prefix to identify your device for remote command sending and receiving.</li></ul><ul id="af5ef83d-e70b-43ae-8c3e-6067f3941b87" class="bulleted-list"><li style="list-style-type:disc"><strong>Animated Traffic Lights:</strong> These lights synchronize with the actual traffic lights controlled by the Raspberry Pi Pico W, providing real-time feedback.</li></ul><ul id="1bc7347a-ff7d-4671-bac7-f5d04b43e366" class="bulleted-list"><li style="list-style-type:disc"><strong>Remote Control Buttons:</strong> Eight buttons configure the traffic light system for various operations.</li></ul><p id="a44df2a5-0595-4a3b-a172-362f87059ae9" class=""><strong>Remote Control Button Commands:</strong></p><ol type="1" id="d7d41d3c-1d31-4359-9e2f-55fe034a89fc" class="numbered-list" start="1"><li><strong>Straight Traffic:</strong> Prioritize straight traffic flow. </li></ol><ol type="1" id="d779016a-6949-4ca5-b7cd-2680dad027ca" class="numbered-list" start="2"><li><strong>Horizontal Traffic:</strong> Prioritize horizontal traffic flow. </li></ol><ol type="1" id="ff3923d3-8ca9-422b-aa50-2e14f464e132" class="numbered-list" start="3"><li><strong>Flash Red Light:</strong> Flash the red light for a specific duration and interval.</li></ol><ol type="1" id="6f88537a-bf91-457b-8a83-ad173ea92b6c" class="numbered-list" start="4"><li><strong>Flash Yellow Light:</strong> Flash the yellow light for a specific duration and interval.</li></ol><ol type="1" id="9771c666-b3be-4f76-a599-c78e80dea444" class="numbered-list" start="5"><li><strong>Traffic Light Mode 1:</strong> Activate pre-defined traffic light sequence 1.<ul id="c7d66cf3-4021-4edf-94de-9c0aa6e68ba9" class="bulleted-list"><li style="list-style-type:disc">Continuously repeat:<ul id="57d4292c-403d-433c-bbd4-3264c3e4e4fa" class="bulleted-list"><li style="list-style-type:circle">Red for 10 seconds (R, 10s)</li></ul><ul id="c2515fd0-5d68-448e-bbd2-0643339489b3" class="bulleted-list"><li style="list-style-type:circle">Red flashing yellow for 0.5 seconds (R/Y, 0.5s)</li></ul><ul id="6ad863ad-1096-4d1e-85e8-3416061184c7" class="bulleted-list"><li style="list-style-type:circle">Green for 3 seconds (G, 3s)</li></ul><ul id="d4606e6b-db5f-4b53-9be5-c5829a1701bf" class="bulleted-list"><li style="list-style-type:circle">Yellow for 0.5 seconds (Y, 0.5s)</li></ul></li></ul></li></ol><ol type="1" id="6323f927-d549-4374-829d-00a5d102ce90" class="numbered-list" start="6"><li><strong>Traffic Light Mode 2:</strong> Activate pre-defined traffic light sequence 2.<ul id="d1ab270d-3b7f-42aa-880a-d1585cb56a9a" class="bulleted-list"><li style="list-style-type:disc">Continuously repeat:<ul id="427d3f99-16d6-4698-87d2-c1d0e7d797c9" class="bulleted-list"><li style="list-style-type:circle">Red for 5 seconds (R, 5s)</li></ul><ul id="104616e9-15b0-478a-b6fe-dbc4fceecf27" class="bulleted-list"><li style="list-style-type:circle">Red flashing yellow for 0.5 seconds (R/Y, 0.5s)</li></ul><ul id="fb703796-23f9-44a1-9e1f-5032090801fc" class="bulleted-list"><li style="list-style-type:circle">Green for 4 seconds (G, 4s)</li></ul><ul id="88d52512-25cb-4735-8209-5cc8702cf309" class="bulleted-list"><li style="list-style-type:circle">Yellow for 0.5 seconds (Y, 0.5s)</li></ul></li></ul></li></ol><ol type="1" id="42389fa6-a357-49d7-8d02-5f9d8043a6a8" class="numbered-list" start="7"><li><strong>Change Light Direction:</strong> Switch between north-south and east-west traffic light control.</li></ol><ol type="1" id="d069a28f-1392-4291-8ac9-5d2bdb9a3c2a" class="numbered-list" start="8"><li><strong>Christmas Mode:</strong> Activate a festive light pattern on the traffic lights.</li></ol><p id="979980c5-5d8b-4e75-9579-39fa842f7cd4" class="">
+</p></div><div id="f550de77-d3c2-4a60-b2eb-515c63b4066a" style="width:37.5%" class="column"><figure id="fb277e72-0f08-42c9-8873-56cd510ca014" class="image"><a href="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/Untitled.png"><img style="width:384px" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/Untitled.png"/></a></figure><p id="00294e4e-32b4-4f25-8272-9c8b67301573" class="">
+</p></div></div><div id="ace1c3f6-1f6b-4d2c-b2a9-f3080f99e3f2" class="column-list"><div id="1d04a5fa-b2a1-436c-a712-c7e8618d4c24" style="width:50%" class="column"><figure id="afb0b9e9-ee27-4f60-abe1-7d94dc617284" class="image"><a href="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t2.gif"><img style="width:480px" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t2.gif"/></a></figure></div><div id="b3bc8ae1-fec4-4dcd-9ca2-dc8f31e3cf77" style="width:50%" class="column"><figure id="111ba9cc-1978-4eaf-9eb7-f7a661d99bfd" class="image"><a href="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t1.gif"><img style="width:480px" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t1.gif"/></a></figure></div></div><div id="8b803306-8037-493c-b12e-bf87138dac38" class="column-list"><div id="7deda69e-c659-42ec-b29a-2ecbf98c2ebe" style="width:50%" class="column"><figure id="e151ec90-234a-48fa-aaf6-0eefc17c0b1b" class="image"><a href="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t3.gif"><img style="width:432px" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t3.gif"/></a></figure></div><div id="57246c51-12b1-43f5-a7d4-1f8a7e839914" style="width:50%" class="column"><figure id="07493933-9ae9-44e5-a27d-565c4927de8a" class="image"><a href="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t4.gif"><img style="width:624px" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t4.gif"/></a></figure></div></div><div id="86b12749-8471-44ba-930a-29f9fad470d0" class="column-list"><div id="3e74a854-c34e-4c3b-87d4-1212886f9c4d" style="width:50%" class="column"><figure id="a5e33ab1-ef80-40e8-93e5-cdb333e0326c" class="image"><a href="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t5.gif"><img style="width:384px" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t5.gif"/></a></figure></div><div id="ffbde546-b298-4b52-8bd7-4af81ec50c40" style="width:50%" class="column"><figure id="989eb8c7-b6eb-4e1d-823d-e10090f767b1" class="image"><a href="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t6.gif"><img style="width:528px" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/t6.gif"/></a></figure></div></div><p id="0094073a-c279-44ac-ab6a-d8f454618eae" class="">
+</p><p id="7ee8803e-fa9d-4d12-bb9b-b02383008ba4" class="">
+</p><figure id="9c7d6ca6-008c-469a-ad59-c462fd131ab3" class="image"><a href="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/19.png"><img style="width:1500px" src="Final%20Project%20-%20IoT-Enabled%20Traffic%20Light%20System%20E%20a135efe00e224415baf54d7661f316f9/19.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
+<script>hljs.highlightAll();</script>
+</body></html>
